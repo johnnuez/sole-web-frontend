@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { Transition } from '@headlessui/react'
 import { useRouter } from 'next/router'
+import routes from '../routes'
 
 export default function Header() {
   const router = useRouter()
@@ -14,33 +15,17 @@ export default function Header() {
             <div className='flex-shrink-0'>{/*Image component here*/}</div>
             <div className='hidden md:block'>
               <div className='flex items-baseline ml-10 space-x-4'>
-                <Link href='/'>
-                  <a
-                    className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
-                      router.pathname === '/' ? 'bg-gray-700' : ''
-                    }`}
-                  >
-                    Inicio
-                  </a>
-                </Link>
-                <Link href='/blog'>
-                  <a
-                    className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
-                      router.pathname === '/blog' ? 'bg-gray-700' : ''
-                    }`}
-                  >
-                    Blog
-                  </a>
-                </Link>
-                <Link href='/shop'>
-                  <a
-                    className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
-                      router.pathname === '/shop' ? 'bg-gray-700' : ''
-                    }`}
-                  >
-                    Tienda
-                  </a>
-                </Link>
+                {routes.map((route) => (
+                  <Link key={route.name} href={route.path}>
+                    <a
+                      className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
+                        router.pathname === route.path ? 'bg-gray-700' : ''
+                      }`}
+                    >
+                      {route.name}
+                    </a>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
@@ -102,33 +87,17 @@ export default function Header() {
       >
         <div className='md:hidden' id='mobile-menu'>
           <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
-            <Link href='/'>
-              <a
-                className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
-                  router.pathname === '/' ? 'bg-gray-700' : ''
-                }`}
-              >
-                Inicio
-              </a>
-            </Link>
-            <Link href='/blog'>
-              <a
-                className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
-                  router.pathname === '/blog' ? 'bg-gray-700' : ''
-                }`}
-              >
-                Blog
-              </a>
-            </Link>
-            <Link href='/shop'>
-              <a
-                className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
-                  router.pathname === '/shop' ? 'bg-gray-700' : ''
-                }`}
-              >
-                Tienda
-              </a>
-            </Link>
+            {routes.map((route) => (
+              <Link key={route.name} href={route.path}>
+                <a
+                  className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
+                    router.pathname === route.path ? 'bg-gray-700' : ''
+                  }`}
+                >
+                  {route.name}
+                </a>
+              </Link>
+            ))}
           </div>
         </div>
       </Transition>
