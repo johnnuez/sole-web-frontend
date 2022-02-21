@@ -8,24 +8,29 @@ export default function Header() {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <nav className='bg-gray-800'>
-      <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8'>
-        <div className='flex items-center justify-between h-16'>
+    <nav className='bg-gray-900 border-b border-slate-100 border-opacity-10 drop-shadow-2xl'>
+      <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 md:py-16'>
+        <div className='flex items-center justify-between h-16 md:justify-center'>
           <div className='flex items-center'>
             <div className='flex-shrink-0'>{/*Image component here*/}</div>
             <div className='hidden md:block'>
-              <div className='flex items-baseline ml-10 space-x-4'>
-                {routes.map((route) => (
-                  <Link key={route.name} href={route.path}>
-                    <a
-                      className={`block px-3 py-2 text-base font-medium text-white rounded-md hover:bg-gray-700 ${
-                        router.pathname === route.path ? 'bg-gray-700' : ''
-                      }`}
-                    >
-                      {route.name}
-                    </a>
-                  </Link>
-                ))}
+              <div className='flex-col'>
+                <div className='w-24 h-24 mx-auto bg-black border rounded-full mb-7 border-slate-100 border-opacity-20'></div>
+                <div className='flex space-x-10'>
+                  {routes.map((route) => (
+                    <Link key={route.name} href={route.path}>
+                      <a
+                        className={`block px-3 py-2 text-base font-medium rounded-sm text-white hover:bg-gray-800 ${
+                          router.pathname === route.path ? 'bg-gray-700' : ''
+                        }`}
+                      >
+                        <p className='text-xs tracking-widest opacity-80'>
+                          {route.name.toUpperCase()}
+                        </p>
+                      </a>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -94,7 +99,7 @@ export default function Header() {
                     router.pathname === route.path ? 'bg-gray-700' : ''
                   }`}
                 >
-                  {route.name}
+                  <p className='text-xs tracking-widest opacity-80'>{route.name.toUpperCase()}</p>
                 </a>
               </Link>
             ))}

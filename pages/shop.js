@@ -1,8 +1,8 @@
-import Layout from '../components/Layout'
+import Layout from '@/components/Layout'
 
 export default function ShopPage() {
   return (
-    <Layout>
+    <Layout title='Tienda'>
       <h1>Shop Page</h1>
     </Layout>
   )
