@@ -11,5 +11,9 @@ const routes = [
     name: 'Tienda',
     path: '/shop',
   },
+  {
+    name: 'Bio',
+    path: '/bio',
+  },
 ]
 export default routes
