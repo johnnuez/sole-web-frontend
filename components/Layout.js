@@ -8,15 +8,15 @@ export default function Layout({ title, keywords, description, children }) {
   const router = useRouter()
 
   return (
-    <div className='w-full h-full bg-slate-800'>
+    <div className='flex flex-col min-h-screen bg-slate-800'>
       <Head>
         <title>{title}</title>
         <meta name='description' content={description}></meta>
         <meta name='keywords' content={keywords}></meta>
       </Head>
       <Header />
-      {router.pathname === '/' && <Hero />}
-      <div className='container min-h-[70vh]'>{children}</div>
+      {router.pathname === '/' && <Hero imageUrl='/heroImage.jpg' title='Sole Tarot y Símbolos' />}
+      <div className=''>{children}</div>
       <Footer />
     </div>
   )
