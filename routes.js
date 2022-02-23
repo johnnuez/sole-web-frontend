@@ -15,5 +15,9 @@ const routes = [
     name: 'Bio',
     path: '/bio',
   },
+  {
+    name: 'Agenda',
+    path: '/schedule',
+  },
 ]
 export default routes

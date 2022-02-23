@@ -3,8 +3,11 @@ import Link from 'next/link'
 
 export default function BlogPostCard({ article }) {
   return (
-    <div className='flex-col flex-1 max-w-xs m-5 break-words border border-gray-200 rounded-lg shadow-2xl dark:bg-gray-800 dark:border-gray-700 justify-self-center'>
-      <div className='relative overflow-hidden bg-black rounded-lg h-96'>
+    <div
+      className='flex-col flex-1 max-w-xs min-w-[20rem] m-5 break-words border border-gray-200 rounded-sm hover:drop-shadow-2xl 
+                 hover:transition-all ease-in-out duration-500 dark:bg-gray-800 dark:border-gray-700 justify-self-center'
+    >
+      <div className='relative overflow-hidden bg-black rounded-sm h-96'>
         <Image
           src={article.imageUrl}
           alt=''
@@ -21,9 +24,7 @@ export default function BlogPostCard({ article }) {
             </h5>
           </a>
         </Link>
-        <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>
-          {article.subtitle} Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem
-        </p>
+        <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>{article.subtitle}</p>
       </div>
     </div>
   )

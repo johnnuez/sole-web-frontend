@@ -4,7 +4,7 @@ import Layout from '@/components/Layout'
 export default function Home() {
   return (
     <Layout>
-      <div className='flex flex-wrap justify-around py-10'>
+      <div className='flex flex-wrap justify-around py-20 px-14'>
         <BlogPostCard
           article={{
             title: 'Title',
