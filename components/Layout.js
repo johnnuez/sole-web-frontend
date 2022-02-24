@@ -8,14 +8,19 @@ export default function Layout({ title, keywords, description, children }) {
   const router = useRouter()
 
   return (
-    <div className='flex flex-col min-h-screen bg-slate-800'>
+    <div className='flex flex-col min-h-screen scroll-smooth bg-slate-800'>
       <Head>
         <title>{title}</title>
         <meta name='description' content={description}></meta>
         <meta name='keywords' content={keywords}></meta>
       </Head>
       <Header />
-      {router.pathname === '/' && <Hero imageUrl='/heroImage.jpg' title='Sole Tarot y Símbolos' />}
+      {router.pathname === '/' && (
+        <Hero
+          imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638308/large_hero_Image_fce74872dd.jpg'
+          title='Sole Tarot y Símbolos'
+        />
+      )}
       <div className=''>{children}</div>
       <Footer />
     </div>
