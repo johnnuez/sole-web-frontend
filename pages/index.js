@@ -1,42 +1,13 @@
 import BlogPostCard from '@/components/BlogPostCard'
 import Layout from '@/components/Layout'
+import { API_URL } from '@/config/index'
+import axios from 'axios'
 
-export default function Home() {
+export default function Home({ posts }) {
   return (
     <Layout>
       <div className='flex flex-wrap justify-around py-20 px-14'>
-        <BlogPostCard
-          article={{
-            title: 'Title',
-            subtitle: 'subtitle',
-            imageUrl: '/bioImage.jpg',
-            slug: 'post-1',
-          }}
-        />
-        <BlogPostCard
-          article={{
-            title: 'Title',
-            subtitle: 'subtitle',
-            imageUrl: '/bioImage.jpg',
-            slug: 'post-1',
-          }}
-        />
-        <BlogPostCard
-          article={{
-            title: 'Title',
-            subtitle: 'subtitle',
-            imageUrl: '/bioImage.jpg',
-            slug: 'post-1',
-          }}
-        />
-        <BlogPostCard
-          article={{
-            title: 'Title',
-            subtitle: 'subtitle',
-            imageUrl: '/bioImage.jpg',
-            slug: 'post-1',
-          }}
-        />
+        {posts && posts.map((post) => <BlogPostCard key={post.id} post={post.attributes} />)}
       </div>
       <div className='flex justify-center w-full my-2'>
         <button
@@ -49,4 +20,14 @@ export default function Home() {
       <br />
     </Layout>
   )
+}
+
+export async function getServerSideProps() {
+  const posts = await axios.get(
+    `${API_URL}/api/posts?pagination[start]=0&pagination[limit]=4&populate=%2A&sort[0]=date%3Adesc`
+  )
+
+  return {
+    props: { posts: posts.data.data },
+  }
 }
