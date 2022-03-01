@@ -17,7 +17,7 @@ export default function Layout({ title, keywords, description, children }) {
       <Header />
       {router.pathname === '/' && (
         <Hero
-          imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638308/large_hero_Image_fce74872dd.jpg'
+          imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg'
           title='Sole Tarot y Símbolos'
         />
       )}
