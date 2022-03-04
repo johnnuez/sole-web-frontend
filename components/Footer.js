@@ -3,7 +3,7 @@ import Newsletter from './Newsletter'
 
 export default function Footer() {
   return (
-    <footer className='flex-shrink-0 w-full py-8 mt-auto bg-white dark:bg-gray-900'>
+    <footer className='flex-shrink-0 w-full py-8 mt-auto bg-gray-900 shadow-[0_-1.5px_7px_0_rgba(0,0,0,0.6)] border-t border-black border-opacity-40'>
       <div className='max-w-screen-xl px-4 mx-auto'>
         <ul className='flex flex-wrap justify-between max-w-screen-md mx-auto text-lg font-light'>
           {/*menu list*/}

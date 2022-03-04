@@ -8,7 +8,7 @@ export default function Header() {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <nav className='bg-gray-900 border-b border-slate-100 border-opacity-10 drop-shadow-2xl'>
+    <nav className='bg-gray-900 border-b border-black shadow-md border-opacity-60 shadow-gray-900'>
       <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 md:py-16'>
         <div className='flex items-center justify-between h-16 md:justify-center'>
           <div className='flex items-center'>

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 export default function BlogPostListItem({ post }) {
@@ -7,7 +6,7 @@ export default function BlogPostListItem({ post }) {
       <a>
         <div
           style={{ backgroundImage: `url(${post.image.data.attributes.formats.medium.url})` }}
-          className='flex flex-col items-center max-w-4xl mx-auto my-5 bg-center bg-cover border border-gray-700 rounded-sm shadow-md hover:bg-gray-700 hover:opacity-70'
+          className='flex flex-col items-center max-w-6xl mx-auto my-5 bg-center bg-cover border border-gray-900 rounded-sm shadow-xl hover:border-gray-500'
         >
           <div className='w-full h-full bg-gray-800 opacity-90'>
             <div className='flex flex-col justify-between flex-1 p-8 leading-normal md:pl-10'>
