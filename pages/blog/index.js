@@ -8,13 +8,17 @@ import MonthPicker from '@/components/MonthPicker'
 export default function BlogPage({ posts, page, totalPages, date }) {
   return (
     <Layout title='Blog'>
-      <div className='container flex flex-col items-center'>
-        <MonthPicker date={date} />
-        <div className='px-4 mt-5'>
+      <div className='container flex flex-col items-center w-full'>
+        <div className='w-full px-4 md:w-11/12'>
+          <div className='my-10 2xl:ml-28'>
+            <MonthPicker date={date} />
+          </div>
           {posts.length > 0 ? (
             posts.map((post) => <BlogPostListItem key={post.id} post={post.attributes} />)
           ) : (
-            <p className='mt-20 text-xl font-bold text-gray-200'>No hay posts para mostrar</p>
+            <p className='mt-20 text-xl font-bold text-center text-gray-200'>
+              No hay posts para mostrar
+            </p>
           )}
         </div>
         <Pagination page={page} totalPages={totalPages} date={date} />

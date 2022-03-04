@@ -43,7 +43,7 @@ export default function MonthPicker({ date }) {
   }
 
   return (
-    <Popover className='relative mt-10'>
+    <Popover className='relative'>
       <Popover.Button className='flex flex-row px-4 py-2 text-white bg-gray-600 rounded-sm shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200'>
         <p className='text-base font-semibold tracking-wide'>{`${monthName(
           dateValue
@@ -67,7 +67,7 @@ export default function MonthPicker({ date }) {
       <Popover.Panel className='absolute z-10'>
         {({ close }) => (
           <motion.div
-            animate={{ x: -40, opacity: [0, 0.2, 1] }}
+            animate={{ x: -5, opacity: [0, 0.2, 1] }}
             transition={{ duration: 0.15, ease: 'easeInOut' }}
             className='flex flex-col justify-center px-1 mt-3 text-base font-semibold text-white bg-gray-800 border border-gray-600 rounded-lg shadow-md w-60 md:w-96'
           >
