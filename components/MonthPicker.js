@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Popover } from '@headlessui/react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
+import { usePopper } from 'react-popper'
 
 const yearsPanelVariants = {
   open: { rotate: 180 },
@@ -32,6 +33,11 @@ export default function MonthPicker({ date }) {
   const [yearsPanelOpen, setYearsPanelOpen] = useState(false)
   const [yearValue, setYearValue] = useState(Number(dateValue.getFullYear()))
   const router = useRouter()
+  const [referenceElement, setReferenceElement] = useState()
+  const [popperElement, setPopperElement] = useState()
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: 'bottom-start',
+  })
 
   const setDateAndRefresh = (month) => {
     const newDate = new Date(yearValue, month + 1, 0)
@@ -43,8 +49,11 @@ export default function MonthPicker({ date }) {
   }
 
   return (
-    <Popover className='relative'>
-      <Popover.Button className='flex flex-row px-4 py-2 text-white bg-gray-600 rounded-sm shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200'>
+    <Popover>
+      <Popover.Button
+        ref={setReferenceElement}
+        className='flex flex-row px-4 py-2 text-white bg-gray-600 rounded-sm shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200'
+      >
         <p className='text-base font-semibold tracking-wide'>{`${monthName(
           dateValue
         )} ${dateValue.getFullYear()}`}</p>
@@ -64,7 +73,12 @@ export default function MonthPicker({ date }) {
         </svg>
       </Popover.Button>
 
-      <Popover.Panel className='absolute z-10'>
+      <Popover.Panel
+        ref={setPopperElement}
+        style={styles.popper}
+        {...attributes.popper}
+        className='z-10'
+      >
         {({ close }) => (
           <motion.div
             animate={{ x: -5, opacity: [0, 0.2, 1] }}

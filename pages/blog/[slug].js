@@ -7,7 +7,7 @@ export default function PostPage({ post }) {
   return (
     <Layout>
       <Hero imageUrl={post.image.data.attributes.url} title={post.title} />
-      <div className='container py-14'>
+      <div className='container px-5 pb-32 md:px-2 lg:px-32'>
         <p className='px-5 mb-5 text-xl text-justify opacity-80 text-amber-50'>
           {new Date(post.date).toLocaleDateString('es-AR')}
         </p>

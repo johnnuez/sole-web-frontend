@@ -1,21 +1,44 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Transition } from '@headlessui/react'
 import { useRouter } from 'next/router'
 import routes from '../routes'
+import { motion } from 'framer-motion'
+import { navBarStates } from './Layout'
 
-export default function Header() {
+export default function Header({ isShrunk }) {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
+
+  const variants = {
+    [navBarStates.largeNavBarShrunk]: {
+      opacity: 0.7,
+      y: -130,
+    },
+    [navBarStates.smallNavBarShrunk]: {
+      opacity: 0.8,
+      y: -8,
+    },
+    [navBarStates.notShrunk]: {
+      opacity: 0.98,
+    },
+  }
+
   return (
-    <nav className='bg-gray-900 border-b border-black shadow-md border-opacity-60 shadow-gray-900'>
-      <div className='px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 md:py-16'>
+    <motion.div
+      className={`bg-gray-900 border-b w-full top-0 z-50 border-black shadow-sm border-opacity-60 shadow-black md:py-16 sticky`}
+      animate={isShrunk}
+      variants={variants}
+      transition={{ duration: 0.5 }}
+    >
+      <div className={`px-4 mx-auto max-w-7xl sm:px-6 lg:px-8`}>
         <div className='flex items-center justify-between h-16 md:justify-center'>
           <div className='flex items-center'>
-            <div className='flex-shrink-0'>{/*Image component here*/}</div>
             <div className='hidden md:block'>
               <div className='flex-col'>
-                <div className='w-24 h-24 mx-auto bg-black border rounded-full mb-7 border-slate-100 border-opacity-20'></div>
+                <div
+                  className={`mx-auto mb-5 bg-black border rounded-full  w-28 h-28 border-slate-100 border-opacity-20`}
+                ></div>
                 <div className='flex space-x-10'>
                   {routes.map((route) => (
                     <Link key={route.name} href={route.path}>
@@ -34,15 +57,14 @@ export default function Header() {
               </div>
             </div>
           </div>
-          <div className='flex -mr-2 md:hidden'>
+          <div className={`flex -mr-2 md:hidden`}>
             <button
               onClick={() => setIsOpen(!isOpen)}
               type='button'
-              className='inline-flex items-center justify-center p-2 text-gray-400 bg-gray-900 rounded-md hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
+              className='inline-flex items-center justify-center p-2 text-gray-400 bg-gray-900 rounded-md hover:bg-gray-800'
               aria-controls='mobile-menu'
               aria-expanded='false'
             >
-              <span className='sr-only'>Open main menu</span>
               {!isOpen ? (
                 <svg
                   className='block w-6 h-6'
@@ -90,7 +112,7 @@ export default function Header() {
         leaveFrom='opacity-100 scale-100'
         leaveTo='opacity-0 scale-95'
       >
-        <div className='md:hidden' id='mobile-menu'>
+        <div className='md:hidden'>
           <div className='px-2 pt-2 pb-3 space-y-1 sm:px-3'>
             {routes.map((route) => (
               <Link key={route.name} href={route.path}>
@@ -99,13 +121,13 @@ export default function Header() {
                     router.pathname === route.path ? 'bg-gray-700' : ''
                   }`}
                 >
-                  <p className='text-xs tracking-widest opacity-80'>{route.name.toUpperCase()}</p>
+                  <p className='text-xs tracking-widest'>{route.name.toUpperCase()}</p>
                 </a>
               </Link>
             ))}
           </div>
         </div>
       </Transition>
-    </nav>
+    </motion.div>
   )
 }

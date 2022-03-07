@@ -4,18 +4,59 @@ import { useRouter } from 'next/router'
 import Footer from './Footer'
 import Header from './Header'
 import Hero from './Hero'
+import { useEffect, useState } from 'react'
+
+export const navBarStates = {
+  notShrunk: 'notShrunk',
+  largeNavBarShrunk: 'largeShrunk',
+  smallNavBarShrunk: 'smallShrunk',
+}
 
 export default function Layout({ title, keywords, description, children }) {
   const router = useRouter()
+  const [isShrunk, setIsShrunk] = useState(navBarStates.notShrunk)
+
+  useEffect(() => {
+    const scrollHandler = () => {
+      const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+      setIsShrunk((isShrunk) => {
+        if (
+          isShrunk === navBarStates.notShrunk &&
+          (document.body.scrollTop >= 20 || document.documentElement.scrollTop >= 20)
+        ) {
+          if (vw <= 767) {
+            return navBarStates.smallNavBarShrunk
+          }
+          return navBarStates.largeNavBarShrunk
+        }
+
+        if (
+          isShrunk !== navBarStates.notShrunk &&
+          document.body.scrollTop < 4 &&
+          document.documentElement.scrollTop < 4
+        ) {
+          return navBarStates.notShrunk
+        }
+
+        return isShrunk
+      })
+    }
+
+    window.addEventListener('scroll', scrollHandler)
+
+    return () => {
+      window.removeEventListener('scroll', scrollHandler)
+    }
+  }, [])
 
   return (
-    <div className='flex flex-col min-h-screen scroll-smooth bg-slate-800'>
+    <div className='flex flex-col min-h-screen bg-gradient-to-t from-slate-700 to-gray-900'>
       <Head>
         <title>{title}</title>
         <meta name='description' content={description}></meta>
         <meta name='keywords' content={keywords}></meta>
       </Head>
-      <Header />
+      <Header isShrunk={isShrunk} />
       <motion.div animate={{ opacity: [0, 1] }}>
         {router.pathname === '/' && (
           <Hero
