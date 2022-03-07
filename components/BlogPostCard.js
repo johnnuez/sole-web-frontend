@@ -1,33 +1,24 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
 export default function BlogPostCard({ post }) {
   return (
     <Link href={`/blog/${post.slug}`}>
       <a>
         <div
-          className='flex-col flex-1 max-w-xs min-w-[20rem] md:max-w-md md:min-w-[24rem] m-5 break-words border rounded-sm hover:drop-shadow-2xl 
-                 hover:transition-all ease-in-out duration-500 bg-gray-800 border-gray-700 justify-self-center hover:opacity-90 hover:bg-gray-700 active:bg-gray-400'
+          style={{ backgroundImage: `url(${post.image.data.attributes.formats.medium.url})` }}
+          className='flex flex-col break-words bg-cover bg-center bg-gray-400 bg-blend-multiply rounded-md min-h-[30rem] w-[21rem] md:w-[23rem] justify-self-center my-5'
         >
-          <div className='relative overflow-hidden rounded-sm h-96'>
-            <Image
-              src={post.image.data.attributes.formats.medium.url}
-              alt={post.title}
-              layout='fill'
-              objectFit='cover'
-              objectPosition='center'
-            />
-          </div>
-          <div className='p-5'>
-            <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white'>
-              {post.title}
-            </h5>
-
-            <p className='mb-1 text-gray-700 dark:text-gray-400'>
+          <motion.div
+            whileHover={{ opacity: 0.8 }}
+            transition={{ duration: 0.5, easings: ['easeInOut'] }}
+            className='flex flex-col items-center justify-end flex-1 h-full p-5 rounded-md shadow-2xl md:opacity-0 md:hover:bg-gradient-to-t hover:from-black hover:to-gray-800'
+          >
+            <h5 className='mb-3 text-3xl font-bold tracking-wide text-gray-300'>{post.title}</h5>
+            <p className='mb-5 text-lg tracking-wider text-gray-400'>
               {new Date(post.date).toLocaleDateString('es-AR')}
             </p>
-            <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>{post.description}</p>
-          </div>
+          </motion.div>
         </div>
       </a>
     </Link>
