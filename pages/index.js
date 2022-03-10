@@ -1,4 +1,5 @@
 import BlogPostCard from '@/components/BlogPostCard'
+import CardCarousel from '@/components/CardCarousel'
 import Layout from '@/components/Layout'
 import { API_URL } from '@/config/index'
 import axios from 'axios'
@@ -23,21 +24,31 @@ const card = {
 }
 
 export default function Home({ posts }) {
+  const blogCardsArray = posts.map((post) => <BlogPostCard key={post.id} post={post.attributes} />)
+
   return (
     <Layout>
       <motion.div
-        className='flex flex-wrap justify-around px-36'
+        className='flex-wrap justify-around hidden px-36 lg:flex'
         initial='hidden'
         animate='visible'
         variants={cardWrapper}
       >
         {posts &&
-          posts.map((post) => (
-            <motion.div key={post.id} transition={{ duration: 0.4 }} variants={card}>
-              <BlogPostCard post={post.attributes} />
+          blogCardsArray.map((blogCard, i) => (
+            <motion.div
+              key={i}
+              transition={{ duration: 0.4 }}
+              variants={card}
+              whileHover={{ scale: 1.05 }}
+            >
+              {blogCard}
             </motion.div>
           ))}
       </motion.div>
+      <div className='flex justify-center lg:hidden'>
+        <CardCarousel cards={blogCardsArray} />
+      </div>
       <div className='flex justify-center w-full my-10'>
         <Link href='/blog/'>
           <a className='flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-gray-600 rounded-sm shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200'>

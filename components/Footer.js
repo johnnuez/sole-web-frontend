@@ -43,7 +43,7 @@ export default function Footer() {
           </Link>
         </div>
         <div className='flex items-center justify-center pt-10 font-light text-center text-gray-500 dark:text-gray-200 sm:pt-12'>
-          <p className='text-base'>Suscribite al newsletter</p>
+          <p className=' text-lg'>Suscribite al newsletter</p>
         </div>
         <div className='flex items-center justify-center pt-4 pb-10 font-light text-center'>
           <Newsletter />
