@@ -36,7 +36,7 @@ export default function MonthPicker({ date }) {
   const [referenceElement, setReferenceElement] = useState()
   const [popperElement, setPopperElement] = useState()
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: 'bottom-start',
+    placement: 'bottom',
   })
 
   const setDateAndRefresh = (month) => {
@@ -77,11 +77,11 @@ export default function MonthPicker({ date }) {
         ref={setPopperElement}
         style={styles.popper}
         {...attributes.popper}
-        className='z-10'
+        className='z-10 opacity-90'
       >
         {({ close }) => (
           <motion.div
-            animate={{ x: -5, opacity: [0, 0.2, 1] }}
+            animate={{ y: 5, opacity: [0, 0.2, 1] }}
             transition={{ duration: 0.15, ease: 'easeInOut' }}
             className='flex flex-col justify-center px-1 mt-3 text-base font-semibold text-white bg-gray-800 border border-gray-600 rounded-lg shadow-md w-60 md:w-96'
           >

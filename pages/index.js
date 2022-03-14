@@ -63,7 +63,7 @@ export default function Home({ posts }) {
 
 export async function getServerSideProps() {
   const posts = await axios.get(
-    `${API_URL}/api/posts?pagination[start]=0&pagination[limit]=3&populate=%2A&sort[0]=date%3Adesc`
+    `${API_URL}/api/posts?pagination[start]=0&pagination[limit]=3&populate=%2A&sort[0]=publishedAt%3Adesc`
   )
 
   return {

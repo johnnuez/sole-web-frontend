@@ -15,9 +15,6 @@ export default function BlogPostCard({ post }) {
             className='flex flex-col items-center justify-end flex-1 h-full p-5 rounded-md shadow-2xl lg:opacity-0 lg:hover:bg-gradient-to-t hover:from-black hover:to-slate-500'
           >
             <h5 className='mb-3 text-3xl font-bold tracking-wide text-gray-300'>{post.title}</h5>
-            <p className='mb-5 text-lg tracking-wider text-gray-400'>
-              {new Date(post.date).toLocaleDateString('es-AR')}
-            </p>
           </motion.div>
         </div>
       </a>
