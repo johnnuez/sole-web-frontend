@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function Pagination({ page, totalPages, date }) {
   return (
-    <div className='flex flex-row p-3 mt-8 mb-12 space-x-4 rounded-full hover:bg-gray-600'>
+    <div className='flex flex-row p-3 space-x-4 rounded-full hover:bg-gray-600'>
       {page > 1 && (
         <Link href={`/blog?page=${page - 1}&date=${date}`}>
           <a>

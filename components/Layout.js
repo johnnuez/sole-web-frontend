@@ -12,7 +12,15 @@ export const navBarStates = {
   smallNavBarShrunk: 'smallShrunk',
 }
 
-export default function Layout({ title, keywords, description, children }) {
+export default function Layout({
+  title,
+  keywords,
+  description,
+  children,
+  hero = false,
+  heroImageUrl = 'https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg',
+  heroTitle = 'Sole tarot y símbolos',
+}) {
   const router = useRouter()
   const [isShrunk, setIsShrunk] = useState(navBarStates.notShrunk)
 
@@ -58,13 +66,17 @@ export default function Layout({ title, keywords, description, children }) {
       </Head>
       <Header isShrunk={isShrunk} />
       <motion.div animate={{ opacity: [0, 1] }}>
-        {router.pathname === '/' && (
+        {router.pathname === '/' ? (
           <Hero
             imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg'
             title='Sole Tarot y Símbolos'
           />
+        ) : hero ? (
+          <Hero imageUrl={heroImageUrl} title={heroTitle} />
+        ) : (
+          ''
         )}
-        <div className=''>{children}</div>
+        <div className='container py-8 mx-auto'>{children}</div>
       </motion.div>
       <Footer />
     </div>
