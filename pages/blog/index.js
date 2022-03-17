@@ -8,11 +8,11 @@ import BlogPostListCard from '@/components/BlogPostListCard'
 export default function BlogPage({ posts, page, totalPages, date }) {
   return (
     <Layout title='Blog'>
-      <div className='flex flex-col w-full 2xl:px-10'>
-        <div className='mx-auto my-10'>
+      <div className='flex flex-col max-w-5xl mx-auto'>
+        <div className='self-center mb-8'>
           <MonthPicker date={date} />
         </div>
-        <div className='grid items-center flex-1 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 justify-items-center gap-y-10'>
+        <div className='grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3 gap-y-10'>
           {posts.length > 0 ? (
             posts.map((post) => (
               <div key={post.id}>
@@ -25,7 +25,7 @@ export default function BlogPage({ posts, page, totalPages, date }) {
             </p>
           )}
         </div>
-        <div className='mx-auto'>
+        <div className='mx-auto mt-8'>
           <Pagination page={page} totalPages={totalPages} date={date} />
         </div>
       </div>

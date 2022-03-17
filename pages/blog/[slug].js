@@ -1,4 +1,3 @@
-import Hero from '@/components/Hero'
 import Layout from '@/components/Layout'
 import axios from 'axios'
 import { API_URL } from '@/config/index'
@@ -6,13 +5,12 @@ import ReactMarkdown from 'react-markdown'
 
 export default function PostPage({ post }) {
   return (
-    <Layout>
-      <Hero imageUrl={post.image.data.attributes.url} title={post.title} />
-      <div className='container px-5 pb-32 md:px-2 lg:px-32'>
-        <p className='px-5 mb-5 text-xl text-justify opacity-80 text-amber-50'>
+    <Layout hero heroTitle={post.title} heroImageUrl={post.image.data.attributes.url}>
+      <div className='max-w-5xl mx-auto'>
+        <p className='mb-5 text-xl text-justify opacity-80 text-amber-50'>
           {new Date(post.publishedAt).toLocaleDateString('es-AR')}
         </p>
-        <ReactMarkdown className='px-5 text-xl text-justify opacity-80 text-amber-50 first-letter:text-4xl'>
+        <ReactMarkdown className='py-8 text-xl text-justify opacity-80 text-amber-50 first-letter:text-4xl'>
           {post.content}
         </ReactMarkdown>
       </div>

@@ -3,6 +3,8 @@ module.exports = {
   theme: {
     container: {
       center: true,
+      maxWidth: '7xl',
+      padding: '7%',
     },
     extend: {},
   },
