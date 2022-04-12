@@ -65,7 +65,7 @@ export default function Layout({
         <meta name='keywords' content={keywords}></meta>
       </Head>
       <Header isShrunk={isShrunk} />
-      <motion.div animate={{ opacity: [0, 1] }}>
+      <motion.div animate={{ opacity: [0, 1] }} transition={{ duration: 1 }}>
         {router.pathname === '/' ? (
           <Hero
             imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg'
@@ -76,7 +76,7 @@ export default function Layout({
         ) : (
           ''
         )}
-        <div className='container py-8 mx-auto'>{children}</div>
+        <div className='pb-8 mx-auto'>{children}</div>
       </motion.div>
       <Footer />
     </div>
