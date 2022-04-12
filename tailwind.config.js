@@ -3,10 +3,13 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      maxWidth: '7xl',
-      padding: '7%',
+      padding: '3%',
     },
-    extend: {},
+    extend: {
+      screens: {
+        '3xl': '1600px',
+      },
+    },
   },
   plugins: [require('@tailwindcss/line-clamp')],
 }

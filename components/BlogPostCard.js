@@ -37,14 +37,14 @@ export default function BlogPostCard({ post, index = 0, duration = 2 }) {
           <a>
             <div
               style={{ backgroundImage: `url(${post.image.data.attributes.formats.medium.url})` }}
-              className='flex flex-col bg-gray-400 bg-center bg-cover rounded-md bg-blend-multiply h-[29rem] max-w-[20rem]'
+              className='flex flex-col bg-gray-400 bg-center bg-cover rounded-md bg-blend-multiply h-[26rem] max-w-[18rem] 3xl:h-[29rem] 3xl:max-w-[20rem]'
             >
               <motion.div
                 whileHover='hover'
                 variants={card}
                 className='flex flex-col justify-end flex-1 w-full rounded-md shadow-2xl lg:opacity-0 lg:hover:bg-gradient-to-t hover:from-black hover:to-slate-800'
               >
-                <motion.div className='h-0.5 bg-white self-start ml-8' variants={bar} />
+                <motion.div className='h-0.5 bg-white self-start ml-5 3xl:ml-10' variants={bar} />
                 <h5 className='px-1 pt-2 pb-8 text-2xl font-bold tracking-wide text-center text-gray-300 opacity-80 line-clamp-6'>
                   {post.title}
                 </h5>

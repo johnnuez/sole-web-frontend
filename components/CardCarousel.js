@@ -42,8 +42,8 @@ export default function CardCarousel({ cards }) {
         }}
       >
         <div className='relative'>
-          {/* <span
-            className='absolute text-black top-[48%] left-1 rounded-full bg-gray-200 p-4 opacity-20 z-10'
+          <span
+            className='hidden lg:block absolute text-black top-[45%] rounded-full bg-gray-200 p-4 opacity-40 z-10 -left-14 hover:opacity-100 active:opacity-40 transition-all ease-in-out duration-500'
             onClick={() => paginate(-1)}
           >
             <svg
@@ -58,7 +58,7 @@ export default function CardCarousel({ cards }) {
             </svg>
           </span>
           <span
-            className='absolute text-black top-[48%] right-1 rounded-full bg-gray-200 p-4 opacity-20 z-10'
+            className='hidden absolute text-black top-[45%] rounded-full bg-gray-200 p-4 opacity-40 z-10 lg:block -right-14 hover:opacity-100 active:opacity-40 transition-all ease-in-out duration-500'
             onClick={() => {
               paginate(1)
             }}
@@ -73,16 +73,16 @@ export default function CardCarousel({ cards }) {
             >
               <path strokeLinecap='round' strokeLinejoin='round' d='M9 5l7 7-7 7' />
             </svg>
-          </span> */}
+          </span>
           {cards[page]}
         </div>
       </motion.div>
-      <div className='flex items-center pt-3'>
+      <div className='flex items-center pt-2 lg:hidden'>
         {cards.map((card, i) => (
           <span
             key={i}
             className={`w-2.5 h-2.5 mx-2 rounded-full ${
-              i === page ? 'bg-gray-200' : 'bg-gray-700'
+              i === page ? 'bg-gray-200' : 'bg-gray-600'
             }`}
             onClick={() => setPage(i)}
           />
