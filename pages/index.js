@@ -1,13 +1,12 @@
 import BlogPostCard from '@/components/BlogPostCard'
 import CardCarousel from '@/components/CardCarousel'
-import CourseSection from '@/components/CourseSection'
-import Heading from '@/components/Heading'
 import Layout from '@/components/Layout'
-import Separator from '@/components/Separator'
+import Section from '@/components/Section'
 import { API_URL } from '@/config/index'
 import axios from 'axios'
+import CourseCard from '@/components/CourseCard'
+import Button from '@/components/Button'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 
 export default function Home({ posts, course }) {
   const blogCardsArray = posts.map((post) => (
@@ -16,40 +15,44 @@ export default function Home({ posts, course }) {
 
   return (
     <Layout>
-      <CourseSection course={course} />
-      <div className='flex justify-center my-8'>
-        <Link href='/blog/'>
-          <a className='px-4 py-2 text-base font-semibold text-white bg-gray-600 rounded-sm shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200'>
-            Ver todos los cursos
-          </a>
-        </Link>
+      <div className='py-[2%] px-[5%]'>
+        <Section title='inscripciones abiertas'>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            viewport={{ once: true }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 2 }}
+          >
+            <div className='py-10'>
+              <CourseCard course={course} />
+            </div>
+          </motion.div>
+          <Button text='inscripciones' href={course.attributes.inscriptionFormUrl} size='2xl' />
+        </Section>
       </div>
-      <Separator />
-      <Heading title='blog' />
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        viewport={{ once: true }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 2 }}
-      >
-        <div className='hidden max-w-6xl gap-3 pt-10 pb-5 mx-auto lg:grid lg:grid-cols-3 justify-items-center 3xl:max-w-7xl'>
-          {posts &&
-            posts.map((post, i) => <BlogPostCard index={i} key={post.id} post={post.attributes} />)}
-        </div>
-
-        <div className='py-8 lg:hidden px-[1%]'>
-          <CardCarousel cards={blogCardsArray} />
-        </div>
-        <div className='flex justify-center my-8'>
-          <Link href='/blog/'>
-            <a className='px-4 py-2 text-base font-semibold text-white bg-gray-600 rounded-sm shadow-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-200'>
-              Ver todos los posts
-            </a>
-          </Link>
-        </div>
-      </motion.div>
-      <Separator />
+      <div className='px-[5%] pb-[2%]'>
+        <Section title='blog' bgBlend='bg-blend-color-burn'>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            viewport={{ once: true }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 2 }}
+          >
+            <div className='py-14'>
+              <div className='hidden max-w-6xl mx-auto lg:grid lg:grid-cols-3 justify-items-center 3xl:max-w-7xl bg-opacity-10 rounded-xl px-[1%]'>
+                {posts &&
+                  posts.map((post, i) => (
+                    <BlogPostCard index={i} key={post.id} post={post.attributes} />
+                  ))}
+              </div>
+              <div className='p-[2%] mx-auto bg-gray-400 lg:hidden bg-opacity-10 backdrop-blur-sm rounded-xl w-fit'>
+                <CardCarousel cards={blogCardsArray} />
+              </div>
+            </div>
+          </motion.div>
+          <Button text='ver más posts' href='/blog' size='xl' />
+        </Section>
+      </div>
     </Layout>
   )
 }

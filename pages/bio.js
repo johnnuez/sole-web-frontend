@@ -1,13 +1,11 @@
-import Heading from '@/components/Heading'
 import Layout from '@/components/Layout'
 import Image from 'next/image'
 
 export default function BioPage() {
   return (
     <Layout title='Bio'>
-      <Heading title='bio' />
-      <div className='max-w-3xl mx-auto'>
-        <div className='relative w-full my-8 shadow-xl h-80 md:h-96'>
+      <div className='max-w-3xl px-5 py-8 mx-auto 3xl:max-w-4xl'>
+        <div className='relative w-full mb-8 shadow-xl h-80 md:h-96'>
           <Image
             src='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg'
             alt=''
@@ -17,7 +15,7 @@ export default function BioPage() {
             className='rounded-md'
           />
         </div>
-        <div className='p-1 text-xl text-amber-50 opacity-80'>
+        <div className='p-1 text-xl 3xl:text-2xl text-amber-50 opacity-80'>
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat qui iste sit quisquam.
             Minus ipsum provident molestiae adipisci voluptatibus nam sint nobis mollitia illum,

@@ -1,12 +1,12 @@
-export default function Hero({ imageUrl, title }) {
+export default function Hero({ imageUrl, title, bgSize }) {
   return (
     <div
-      className={`w-full h-[45rem] max-h-[95vh] flex-1 mt-[-12rem] opacity-95 bg-cover bg-center bg-fixed`}
+      className={`h-[49rem] max-h-[95vh] mt-[-16rem] opacity-95 ${bgSize} bg-center bg-fixed bg-zinc-900 bg-opacity-80 bg-blend-overlay shadow-lg`}
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
-      <div className='flex items-center justify-center w-full h-full bg-gray-900 shadow-lg bg-opacity-10 border-slate-100 border-opacity-20'>
-        <div className='text-center px-[1%]'>
-          <h1 className='mt-[40%] text-2xl 3xl:text-3xl font-semibold tracking-widest text-white uppercase opacity-30'>
+      <div className='flex items-center justify-center w-full h-full backdrop-blur-sm'>
+        <div className='text-center p-[1%] max-w-4xl mt-52'>
+          <h1 className='text-3xl font-semibold tracking-[0.2em] text-yellow-500 uppercase opacity-70 3xl:text-4xl line-clamp-6'>
             {title}
           </h1>
         </div>

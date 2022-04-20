@@ -5,8 +5,8 @@ export default function BlogPostListCard({ post }) {
   return (
     <Link href={`/blog/${post.slug}`}>
       <a>
-        <div className='flex flex-col max-w-sm p-0.5 pb-8 mx-auto bg-gray-700 rounded-md opacity-95 hover:shadow-xl hover:opacity-100'>
-          <div className='w-full h-full'>
+        <div className='flex flex-col max-w-sm pb-8 mx-auto bg-yellow-500 shadow-xl bg-opacity-20 hover:bg-opacity-50'>
+          <div className='w-full h-full p-1.5'>
             <Image
               src={post.image.data.attributes.formats.medium.url}
               alt=''
@@ -15,7 +15,6 @@ export default function BlogPostListCard({ post }) {
               objectPosition='center'
               width='90%'
               height='75%'
-              className='rounded-t-md'
             />
           </div>
           <div className='px-5 opacity-80'>

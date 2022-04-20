@@ -3,19 +3,15 @@ import Newsletter from './Newsletter'
 
 export default function Footer() {
   return (
-    <footer className='flex-shrink-0 w-full py-8 mt-auto bg-gray-900 shadow-[0_-1.5px_7px_0_rgba(0,0,0,0.6)] border-t border-black border-opacity-40'>
+    <footer className='w-full pt-8 pb-16 mt-auto shadow-[0_-1.5px_7px_0_rgba(0,0,0,0.6)] border-t border-black border-opacity-40 bg-zinc-900'>
       <div className='max-w-screen-xl px-4 mx-auto'>
-        <ul className='flex flex-wrap justify-between max-w-screen-md mx-auto text-lg font-light'>
-          {/*menu list*/}
-        </ul>
-        <div className='flex items-center justify-center max-w-xs pt-8 mx-auto'>
+        <div className='flex items-center justify-center max-w-xs mx-auto space-x-5'>
           <Link href='https://www.instagram.com/sole.tarotysimbolos/'>
-            <a className='mr-5 text-gray-400 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white'>
+            <a className='text-yellow-500 transition-all duration-200 opacity-50 hover:opacity-80'>
               <svg
-                width='35'
-                height='35'
+                width='55'
+                height='55'
                 fill='currentColor'
-                className='text-xl transition-colors duration-200 hover:text-gray-800 dark:hover:text-white'
                 viewBox='0 0 512 512'
                 xmlns='http://www.w3.org/2000/svg'
               >
@@ -28,12 +24,11 @@ export default function Footer() {
             </a>
           </Link>
           <Link href='https://www.youtube.com/channel/UCExe9d7KqUhbC1GvybXN2ng/about'>
-            <a className='text-gray-400 transition-colors duration-200 hover:text-gray-800 dark:hover:text-white'>
+            <a className='text-yellow-500 transition-all duration-200 opacity-50 hover:opacity-80'>
               <svg
-                width='40'
-                height='40'
+                width='65'
+                height='65'
                 fill='currentColor'
-                className='text-xl transition-colors duration-200 hover:text-gray-800 dark:hover:text-white'
                 viewBox='0 0 512 512'
                 xmlns='http://www.w3.org/2000/svg'
               >
@@ -43,9 +38,9 @@ export default function Footer() {
           </Link>
         </div>
         <div className='flex items-center justify-center pt-10 font-light text-center text-gray-500 dark:text-gray-200 sm:pt-12'>
-          <p className=' text-lg'>Suscribite al newsletter</p>
+          <p className='text-xl'>Suscribite al newsletter</p>
         </div>
-        <div className='flex items-center justify-center pt-4 pb-10 font-light text-center'>
+        <div className='flex items-center justify-center pt-4 font-light text-center'>
           <Newsletter />
         </div>
       </div>

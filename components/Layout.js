@@ -18,6 +18,7 @@ export default function Layout({
   description,
   children,
   hero = false,
+  bgSize = 'bg-cover',
   heroImageUrl = 'https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg',
   heroTitle = 'Sole tarot y símbolos',
 }) {
@@ -58,7 +59,7 @@ export default function Layout({
   }, [])
 
   return (
-    <div className='flex flex-col min-h-screen bg-gradient-to-t from-slate-700 to-gray-900'>
+    <div className='flex flex-col min-h-screen bg-gradient-to-t from-slate-800 to-gray-900'>
       <Head>
         <title>{title}</title>
         <meta name='description' content={description}></meta>
@@ -70,13 +71,14 @@ export default function Layout({
           <Hero
             imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg'
             title='Sole Tarot y Símbolos'
+            bgSize={bgSize}
           />
         ) : hero ? (
-          <Hero imageUrl={heroImageUrl} title={heroTitle} />
+          <Hero imageUrl={heroImageUrl} title={heroTitle} bgSize={bgSize} />
         ) : (
           ''
         )}
-        <div className='pb-8 mx-auto'>{children}</div>
+        <div className='mx-auto'>{children}</div>
       </motion.div>
       <Footer />
     </div>
