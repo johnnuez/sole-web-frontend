@@ -8,8 +8,8 @@ const routes = [
     path: '/blog',
   },
   {
-    name: 'Tienda',
-    path: '/shop',
+    name: 'cursos',
+    path: '/courses',
   },
   {
     name: 'Bio',

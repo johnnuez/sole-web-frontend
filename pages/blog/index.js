@@ -8,7 +8,7 @@ import BlogPostListCard from '@/components/BlogPostListCard'
 export default function BlogPage({ posts, page, totalPages, date }) {
   return (
     <Layout title='Blog'>
-      <div className='flex flex-col max-w-5xl mx-auto'>
+      <div className='flex flex-col 3xl:max-w-7xl max-w-6xl mx-auto px-[3%] py-8'>
         <div className='self-center mb-8'>
           <MonthPicker date={date} />
         </div>

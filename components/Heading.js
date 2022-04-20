@@ -1,5 +1,7 @@
 export default function Heading({ title }) {
   return (
-    <p className='text-2xl tracking-[0.7em] text-center text-gray-500'>{title.toUpperCase()}</p>
+    <div className='mx-auto w-fit text-xl sm:text-2xl tracking-[0.4em] text-center text-yellow-500 font-extralight'>
+      <p>{title.toUpperCase()}</p>
+    </div>
   )
 }
