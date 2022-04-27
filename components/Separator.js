@@ -1,3 +1,3 @@
-export default function Separator() {
-  return <hr className='mx-[20%] border border-gray-700 opacity-20 my-14' />
+export default function Separator({ margin = 'my-3' }) {
+  return <hr className={`mx-[25%] border-t border-yellow-600 opacity-10 ${margin}`} />
 }

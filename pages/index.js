@@ -7,6 +7,7 @@ import axios from 'axios'
 import CourseCard from '@/components/CourseCard'
 import Button from '@/components/Button'
 import { motion } from 'framer-motion'
+import ScheduleCard from '@/components/ScheduleCard'
 
 export default function Home({ posts, course }) {
   const blogCardsArray = posts.map((post) => (
@@ -15,22 +16,34 @@ export default function Home({ posts, course }) {
 
   return (
     <Layout>
-      <div className='py-[2%] px-[5%]'>
-        <Section title='inscripciones abiertas'>
+      <div className='px-[2%] py-[1%]'>
+        <Section title='Cursos & talleres' bgBlend='bg-blend-color-burn'>
+          <motion.div
+            initial={{ x: -50 }}
+            viewport={{ once: true }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 2 }}
+          >
+            <div className='py-5'>
+              <CourseCard course={course} />
+            </div>
+          </motion.div>
+          <Button text='inscripciones' href={course.attributes.inscriptionFormUrl} size='lg' />
+        </Section>
+      </div>
+      <div className='px-[2%] pb-[1%]'>
+        <Section title='' bgBlend='bg-blend-color-burn'>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             viewport={{ once: true }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 2 }}
           >
-            <div className='py-10'>
-              <CourseCard course={course} />
-            </div>
+            <ScheduleCard />
           </motion.div>
-          <Button text='inscripciones' href={course.attributes.inscriptionFormUrl} size='2xl' />
         </Section>
       </div>
-      <div className='px-[5%] pb-[2%]'>
+      <div className='px-[2%] pb-[1%]'>
         <Section title='blog' bgBlend='bg-blend-color-burn'>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -38,7 +51,7 @@ export default function Home({ posts, course }) {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 2 }}
           >
-            <div className='py-14'>
+            <div className='py-10'>
               <div className='hidden max-w-6xl mx-auto lg:grid lg:grid-cols-3 justify-items-center 3xl:max-w-7xl bg-opacity-10 rounded-xl px-[1%]'>
                 {posts &&
                   posts.map((post, i) => (
@@ -50,7 +63,7 @@ export default function Home({ posts, course }) {
               </div>
             </div>
           </motion.div>
-          <Button text='ver más posts' href='/blog' size='xl' />
+          <Button text='ver más posts' href='/blog' size='md' />
         </Section>
       </div>
     </Layout>

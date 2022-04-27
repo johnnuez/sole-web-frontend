@@ -3,7 +3,7 @@ import Newsletter from './Newsletter'
 
 export default function Footer() {
   return (
-    <footer className='w-full pt-8 pb-16 mt-auto shadow-[0_-1.5px_7px_0_rgba(0,0,0,0.6)] border-t border-black border-opacity-40 bg-zinc-900'>
+    <footer className='w-full pt-10 pb-24 mt-auto shadow-[0_-1.5px_7px_0_rgba(0,0,0,0.2)] border-t border-black border-opacity-40 bg-zinc-900'>
       <div className='max-w-screen-xl px-4 mx-auto'>
         <div className='flex items-center justify-center max-w-xs mx-auto space-x-5'>
           <Link href='https://www.instagram.com/sole.tarotysimbolos/'>
