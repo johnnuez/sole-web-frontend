@@ -12,10 +12,10 @@ export default function PostPage({ post }) {
       title={post.title}
     >
       <div className='max-w-3xl px-6 py-8 mx-auto 3xl:max-w-4xl'>
-        <p className='mb-5 text-xl text-justify opacity-80 text-amber-50'>
+        <p className='mb-5 text-lg text-justify opacity-80 text-amber-50'>
           {new Date(post.publishedAt).toLocaleDateString('es-AR')}
         </p>
-        <ReactMarkdown className='py-8 text-xl tracking-wide text-justify 3xl:text-2xl opacity-80 text-amber-50 first-letter:text-4xl'>
+        <ReactMarkdown className='py-8 text-lg tracking-wide text-justify 3xl:text-xl opacity-80 text-amber-50 first-letter:text-4xl'>
           {post.content}
         </ReactMarkdown>
       </div>

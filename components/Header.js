@@ -25,7 +25,7 @@ export default function Header({ isShrunk }) {
 
   return (
     <motion.div
-      className='sticky top-0 z-50 w-full shadow-sm bg-opacity-90 shadow-zinc-900 md:py-14 bg-zinc-900 backdrop-blur-sm'
+      className='sticky top-0 z-50 w-full bg-opacity-90 md:py-14 bg-zinc-900 backdrop-blur-sm shadow-[0_1.5px_5px_0_rgba(0,0,0,0.5)]'
       animate={isShrunk}
       variants={variants}
       transition={{ duration: 1 }}
