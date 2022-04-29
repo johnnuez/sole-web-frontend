@@ -33,22 +33,20 @@ export default function CoursePage({
       <div className='max-w-3xl px-6 py-8 mx-auto 3xl:max-w-4xl'>
         {!onlyRecorded ? (
           <>
-            <div className='mb-5'>
-              <Heading title='inscripciones' />
+            <div className='mb-6'>
+              <Heading title='Inscripciones' />
             </div>
             {inscriptionsOpen ? (
               <Button text='ir al formulario' href={inscriptionFormUrl} size='xl' />
             ) : (
-              <p className='text-2xl tracking-widest text-center opacity-80 text-amber-50'>
-                PRÓXIMAMENTE
-              </p>
+              <p className='text-2xl tracking-widest text-center text-neutral-300'>PRÓXIMAMENTE</p>
             )}
             <>
               <Separator margin='my-6' />
             </>
             {!inscriptionsOpen && waitListFormUrl && (
               <>
-                <p className='mb-8 text-xl tracking-widest text-center opacity-80 text-amber-50'>
+                <p className='mb-8 text-2xl tracking-widest text-center text-neutral-300'>
                   Anotate en la lista de interesados y recibí noticias de este curso en tu email
                 </p>
                 <Button text='formulario de interesados' href={waitListFormUrl} size='lg' />
@@ -57,10 +55,10 @@ export default function CoursePage({
             )}
             {inscriptionsOpen && (
               <>
-                <div className='mb-5'>
-                  <Heading title='comienzo' />
+                <div className='mb-6'>
+                  <Heading title='Comienzo' />
                 </div>
-                <p className='text-xl tracking-widest text-center opacity-80 text-amber-50'>
+                <p className='text-2xl tracking-widest text-center text-neutral-300'>
                   {new Intl.DateTimeFormat('es-AR', {
                     month: 'long',
                     year: 'numeric',
@@ -68,12 +66,10 @@ export default function CoursePage({
                   }).format(new Date(startDate))}
                 </p>
                 <Separator margin='my-6' />
-                <div className='mb-5'>
+                <div className='mb-6'>
                   <Heading title='Frecuencia' />
                 </div>
-                <p className='text-xl tracking-widest text-center opacity-80 text-amber-50'>
-                  {schedule}
-                </p>
+                <p className='text-2xl tracking-widest text-center text-neutral-300'>{schedule}</p>
                 <Separator margin='my-6' />
               </>
             )}
@@ -83,31 +79,29 @@ export default function CoursePage({
         )}
         {recordingsFormUrl && (
           <>
-            <div className='mb-5'>
+            <div className='mb-6'>
               <Heading title='Grabaciones' />
             </div>
-            <p className='my-8 text-xl tracking-widest text-center opacity-80 text-amber-50'>
+            <p className='my-8 text-xl tracking-widest text-center text-neutral-300'>
               Adquirí este curso grabado y recibí acceso a videos y materiales
             </p>
             <Button text='acceder a grabaciones' href={recordingsFormUrl} size='lg' />
             <Separator margin='my-6' />
           </>
         )}
-        <div className='mb-5'>
-          <Heading title='programa' />
+        <div className='mb-6'>
+          <Heading title='Programa' />
         </div>
-        <ReactMarkdown className='pb-8 text-lg tracking-wide text-justify 3xl:text-xl opacity-80 text-amber-50 first-letter:text-4xl'>
+        <ReactMarkdown className='pb-8 text-xl tracking-wide text-justify 3xl:text-2xl text-neutral-300'>
           {program}
         </ReactMarkdown>
         {inscriptionsOpen && (
           <>
             <Separator margin='my-6' />
-            <div className='mb-5'>
-              <Heading title='costo' />
+            <div className='mb-6'>
+              <Heading title='Costo' />
             </div>
-            <p className='pb-5 text-2xl tracking-widest text-center opacity-80 text-amber-50'>
-              {price}
-            </p>
+            <p className='pb-5 text-2xl tracking-widest text-center text-neutral-300'>{price}</p>
           </>
         )}
       </div>

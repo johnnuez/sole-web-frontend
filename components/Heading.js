@@ -1,9 +1,9 @@
 export default function Heading({ title }) {
   return (
     <div
-      className={`mx-auto w-fit text-lg sm:text-xl 3xl:text-2xl tracking-[0.4em] text-center text-yellow-500 font-extralight`}
+      className={`mx-auto w-fit text-3xl tracking-[0.2em] text-center text-yellow-600 opacity-70`}
     >
-      <p>{title.toUpperCase()}</p>
+      <h2>{title}</h2>
     </div>
   )
 }

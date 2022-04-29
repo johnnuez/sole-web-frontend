@@ -6,7 +6,7 @@ export default function Hero({ imageUrl, title, bgSize }) {
     >
       <div className='flex items-center justify-center w-full h-full backdrop-blur-sm'>
         <div className='text-center p-[1%] max-w-4xl mt-52'>
-          <h1 className='text-3xl font-semibold tracking-[0.2em] text-yellow-500 uppercase opacity-70 3xl:text-4xl line-clamp-6'>
+          <h1 className='text-5xl font-semibold tracking-[0.2em] text-yellow-600 uppercase opacity-70 3xl:text-6xl line-clamp-6'>
             {title}
           </h1>
         </div>

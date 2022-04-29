@@ -17,22 +17,22 @@ export default function Home({ posts, course }) {
   return (
     <Layout>
       <div className='px-[2%] py-[1%]'>
-        <Section title='Cursos & talleres' bgBlend='bg-blend-color-burn'>
+        <Section title='Cursos & Talleres'>
           <motion.div
             initial={{ x: -50 }}
             viewport={{ once: true }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 2 }}
           >
-            <div className='py-5'>
+            <div className='py-3'>
               <CourseCard course={course} />
             </div>
           </motion.div>
-          <Button text='inscripciones' href={course.attributes.inscriptionFormUrl} size='lg' />
+          <Button text='inscripciones' href={course.attributes.inscriptionFormUrl} size='xl' />
         </Section>
       </div>
       <div className='px-[2%] pb-[1%]'>
-        <Section title='' bgBlend='bg-blend-color-burn'>
+        <Section title=''>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             viewport={{ once: true }}
@@ -44,14 +44,14 @@ export default function Home({ posts, course }) {
         </Section>
       </div>
       <div className='px-[2%] pb-[1%]'>
-        <Section title='blog' bgBlend='bg-blend-color-burn'>
+        <Section title='Blog'>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             viewport={{ once: true }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 2 }}
           >
-            <div className='py-10'>
+            <div className='py-8'>
               <div className='hidden max-w-6xl mx-auto lg:grid lg:grid-cols-3 justify-items-center 3xl:max-w-7xl bg-opacity-10 rounded-xl px-[1%]'>
                 {posts &&
                   posts.map((post, i) => (
@@ -63,7 +63,7 @@ export default function Home({ posts, course }) {
               </div>
             </div>
           </motion.div>
-          <Button text='ver más posts' href='/blog' size='md' />
+          <Button text='ver más posts' href='/blog' size='lg' />
         </Section>
       </div>
     </Layout>
