@@ -48,11 +48,11 @@ export default function Header({ isShrunk }) {
                   {routes.map((route) => (
                     <Link key={route.name} href={route.path}>
                       <a
-                        className={`block px-3 py-2 rounded-sm text-white hover:bg-opacity-60 hover:bg-yellow-500 transition-all ease-in-out duration-200 ${
-                          router.pathname === route.path ? 'bg-opacity-20 bg-yellow-500' : ''
+                        className={`block px-3 py-2 rounded-sm text-neutral-200 hover:bg-opacity-80 hover:bg-yellow-600 transition-all ease-in-out duration-200 ${
+                          router.pathname === route.path ? 'bg-opacity-20 bg-yellow-600' : ''
                         }`}
                       >
-                        <p className='text-xs tracking-widest opacity-80 3xl:text-base'>
+                        <p className='text-xs tracking-[0.15em] 3xl:text-base'>
                           {route.name.toUpperCase()}
                         </p>
                       </a>
@@ -128,11 +128,13 @@ export default function Header({ isShrunk }) {
             {routes.map((route) => (
               <Link key={route.name} href={route.path}>
                 <a
-                  className={`block px-3 py-2 rounded-sm text-white hover:bg-yellow-500 hover:bg-opacity-80 bg-opacity-50 ${
-                    router.pathname === route.path ? 'bg-yellow-500' : ''
+                  className={`block px-3 py-2 rounded-sm text-neutral-200 hover:bg-opacity-80 hover:bg-yellow-600 transition-all ease-in-out duration-200 ${
+                    router.pathname === route.path ? 'bg-opacity-20 bg-yellow-600' : ''
                   }`}
                 >
-                  <p className='text-xs tracking-widest'>{route.name.toUpperCase()}</p>
+                  <p className='text-xs tracking-[0.15em] 3xl:text-base'>
+                    {route.name.toUpperCase()}
+                  </p>
                 </a>
               </Link>
             ))}

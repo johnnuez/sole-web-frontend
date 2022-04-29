@@ -36,7 +36,7 @@ export default function BlogPostCard({ post, index = 0, duration = 2 }) {
           <a>
             <div
               style={{ backgroundImage: `url(${post.image.data.attributes.formats.medium.url})` }}
-              className='flex flex-col bg-center bg-cover rounded-md h-[26rem] max-w-[18rem] 3xl:h-[30rem] 3xl:max-w-[21rem] bg-zinc-900 bg-opacity-40 bg-blend-hard-light'
+              className='flex flex-col bg-center bg-cover rounded-md h-[26rem] max-w-[18rem] 3xl:h-[30rem] 3xl:max-w-[21rem] bg-zinc-700 bg-opacity-40 bg-blend-hard-light'
             >
               <motion.div
                 whileHover='hover'
@@ -44,7 +44,7 @@ export default function BlogPostCard({ post, index = 0, duration = 2 }) {
                 className='flex flex-col justify-end flex-1 w-full rounded-md shadow-2xl lg:opacity-0 lg:hover:bg-gradient-to-t hover:from-gray-900 hover:to-yellow-700'
               >
                 <motion.div className='h-0.5 bg-white self-center' variants={bar} />
-                <p className='px-2 mt-3 mb-5 text-xl font-bold tracking-wider text-center rounded-lg text-amber-50 3xl:text-2xl line-clamp-6'>
+                <p className='px-2 mt-3 mb-5 text-xl tracking-wider text-center rounded-lg text-neutral-200 3xl:text-2xl line-clamp-6'>
                   {post.title}
                 </p>
               </motion.div>

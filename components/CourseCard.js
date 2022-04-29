@@ -28,7 +28,7 @@ export default function CourseCard({
   pictureOnRight = false,
 }) {
   return (
-    <div className='flex flex-col md:flex-row mx-auto px-[1%] max-w-[70rem] 3xl:max-w-[80rem] transition-all ease-in-out items-center'>
+    <div className='flex flex-col md:flex-row mx-auto max-w-[70rem] 3xl:max-w-[80rem] transition-all ease-in-out items-center'>
       <div
         className={`flex-[3] md:py-10 overflow-hidden rounded-lg mx-auto z-10 w-11/12 ${
           pictureOnRight ? 'md:hidden' : ''
@@ -46,23 +46,25 @@ export default function CourseCard({
       <div
         className={`py-3 ${
           !pictureOnRight ? 'md:-ml-5' : 'md:-mr-5'
-        } text-gray-50 bg-gray-800 rounded-lg flex-[5] mx-auto flex flex-col tracking-widest bg-opacity-30 backdrop-blur-md justify-center min-h-[30rem] 3xl:min-h-[32rem] w-11/12 my-2 md:my-0 border border-yellow-500 border-opacity-20`}
+        } text-neutral-200 bg-gray-800 rounded-lg flex-[5] mx-auto flex flex-col tracking-widest bg-opacity-50 justify-center min-h-[30rem] 3xl:min-h-[32rem] w-11/12 my-2 md:my-0 border border-yellow-500 border-opacity-20`}
       >
         <div className='flex flex-col px-[5%] justify-center'>
-          <div className='mb-2 text-2xl text-center 3xl:text-3xl'>
-            <Heading title={title} />
+          <div className='mb-1 text-5xl tracking-wider text-center 3xl:text-6xl'>
+            <h1>{title}</h1>
           </div>
           <Separator />
         </div>
-        <div className='flex flex-col justify-between flex-1 px-[1%] mx-10 bg-opacity-70 md:px-20'>
+        <div className='flex flex-col justify-between flex-1 px-8 text-lg tracking-widest md:px-14 bg-opacity-70'>
           <ReactMarkdown
             components={{
-              h1: ({ node, ...props }) => (
-                <p className='self-center text-lg tracking-[0.2em]' {...props} />
+              h2: ({ node, ...props }) => (
+                <h2 className='self-center text-lg tracking-[0.2em]' {...props} />
               ),
               li: ({ node, ordered, ...props }) => <li className='mb-4' {...props} />,
-              ul: ({ node, ordered, ...props }) => <ul className='mt-4 list-disc' {...props} />,
-              p: ({ node, ...props }) => <p className='self-center tracking-widest' {...props} />,
+              ul: ({ node, ordered, ...props }) => (
+                <ul className='mt-4 ml-3 list-disc' {...props} />
+              ),
+              p: ({ node, ...props }) => <p className='self-center' {...props} />,
             }}
           >
             {summary}
@@ -70,14 +72,14 @@ export default function CourseCard({
         </div>
         <div className='flex flex-col justify-center'>
           <Separator />
-          <p className='text-lg tracking-widest text-center'>
+          <p className='text-lg tracking-[0.15em] text-center'>
             {inscriptionsOpen
               ? `Fecha de inicio: ${new Date(startDate).toLocaleDateString('es-AR')}`
               : 'PRÓXIMAMENTE'}
           </p>
-          <div className='mt-5 mb-3 text-lg text-center md:mt-3 md:mb-1'>
+          <div className='mt-5 mb-3 text-xl text-center md:mt-3 md:mb-1'>
             <Link href={`/courses/${slug}`}>
-              <a className='tracking-[0.2em] border border-yellow-600 hover:text-yellow-500 3xl:text-xl md:border-none border-opacity-80 transition-all ease-in-out duration-200 p-2 rounded-sm'>
+              <a className='tracking-[0.2em] border border-yellow-600 hover:text-yellow-500 md:border-none border-opacity-80 transition-all ease-in-out duration-200 p-2 rounded-sm'>
                 VER MÁS
               </a>
             </Link>
