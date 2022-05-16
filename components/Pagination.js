@@ -3,10 +3,10 @@ import Link from 'next/link'
 
 export default function Pagination({ page, totalPages, date }) {
   return (
-    <div className='flex flex-row p-3 space-x-4 transition-all duration-200 ease-in-out rounded-full hover:bg-yellow-500 hover:bg-opacity-20'>
+    <div className='flex flex-row space-x-3 transition-all duration-200 ease-in-out rounded-full'>
       {page > 1 && (
         <Link href={`/blog?page=${page - 1}&date=${date}`}>
-          <a>
+          <a className='p-3 rounded-full hover:bg-yellow-500 hover:bg-opacity-50'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='w-6 h-6 stroke-gray-200'
@@ -25,7 +25,7 @@ export default function Pagination({ page, totalPages, date }) {
       )}
       {page < totalPages && (
         <Link href={`/blog?page=${page + 1}&date=${date}`}>
-          <a>
+          <a className='p-3 rounded-full hover:bg-yellow-500 hover:bg-opacity-50'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='w-6 h-6 stroke-gray-200'

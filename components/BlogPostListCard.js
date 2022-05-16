@@ -15,6 +15,7 @@ export default function BlogPostListCard({ post }) {
               objectPosition='center'
               width='90%'
               height='75%'
+              priority={true}
             />
           </div>
           <div className='px-5 opacity-80'>

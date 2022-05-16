@@ -4,19 +4,22 @@ import Image from 'next/image'
 export default function BioPage() {
   return (
     <Layout title='Bio'>
-      <div className='max-w-3xl px-5 py-8 mx-auto 3xl:max-w-4xl'>
-        <div className='relative w-full mb-8 shadow-xl h-80 md:h-96'>
+      <div className='flex flex-col max-w-3xl px-5 py-5 mx-auto 3xl:max-w-4xl'>
+        <div className='flex-1 mb-5 shadow-xl'>
           <Image
-            src='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg'
+            src='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1651588084/large_bio_e01f8fb3b5.jpg'
             alt=''
-            layout='fill'
+            layout='responsive'
             objectFit='cover'
             objectPosition='center'
             className='rounded-md'
+            width={100}
+            height={60}
+            priority={true}
           />
         </div>
-        <div className='p-1 text-lg 3xl:text-xl text-amber-50 opacity-80'>
-          <p className='mb-5'>Sole Núñez</p>
+        <div className='flex-1 p-1 text-lg tracking-wide 3xl:text-xl text-neutral-300'>
+          <h1 className='mb-5 text-5xl tracking-widest text-center text-neutral-300'>Sole Núñez</h1>
           <p className='mb-5'>
             Mi nombre es Soledad (con todo lo que eso implica) y nací en Uruguay en 1985.
             Fuertemente sol en Géminis, definitivamente luna en Piscis, trabajosamente ascendente en

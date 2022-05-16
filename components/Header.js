@@ -10,6 +10,7 @@ import Image from 'next/image'
 export default function Header({ isShrunk }) {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
+  const [logoClicked, setLogoClicked] = useState(false)
 
   const variants = {
     [navBarStates.largeNavBarShrunk]: {
@@ -25,7 +26,7 @@ export default function Header({ isShrunk }) {
 
   return (
     <motion.div
-      className='sticky top-0 z-50 w-full bg-opacity-90 md:py-14 bg-zinc-900 backdrop-blur-sm shadow-[0_1.5px_5px_0_rgba(0,0,0,0.5)]'
+      className='sticky top-0 z-50 w-full bg-opacity-90 md:pb-20 md:pt-10 bg-zinc-900 backdrop-blur-sm shadow-[0_1.5px_5px_0_rgba(0,0,0,0.5)]'
       animate={isShrunk}
       variants={variants}
       transition={{ duration: 1 }}
@@ -35,16 +36,35 @@ export default function Header({ isShrunk }) {
           <div className='flex items-center'>
             <div className='hidden md:block'>
               <div className='flex-col'>
-                <div className='p-3 mx-auto mb-5 bg-yellow-500 rounded-full bg-opacity-30 w-36 h-36 border-opacity-30'>
-                  <Image
-                    alt=''
-                    src='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1649872673/small_cloud_eye_010821_f1b7b046ad.png'
-                    layout='responsive'
-                    width={100}
-                    height={100}
-                  />
-                </div>
-                <div className='flex pt-2 pb-12 space-x-10'>
+                <Link href='/'>
+                  <a>
+                    <div
+                      className={`${
+                        logoClicked
+                          ? 'shadow-[0_0_20px_8px_rgba(255,255,255,0.8)] duration-100'
+                          : 'hover:shadow-[0_0_20px_8px_rgba(234,179,8,0.8)] duration-700'
+                      } relative mx-auto mb-5 overflow-hidden border border-yellow-500 rounded-full w-36 h-36 border-opacity-30
+                      transition-shadow ease-in-out`}
+                      onClick={() => {
+                        setLogoClicked(true)
+                      }}
+                      onTransitionEnd={() => {
+                        setLogoClicked(false)
+                      }}
+                    >
+                      <div className='absolute -top-[1.15rem] -left-[1.15rem]'>
+                        <Image
+                          alt=''
+                          src='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1649872673/small_cloud_eye_010821_f1b7b046ad.png'
+                          layout='fixed'
+                          width='180'
+                          height='180'
+                        />
+                      </div>
+                    </div>
+                  </a>
+                </Link>
+                <div className='flex pt-2 space-x-10'>
                   {routes.map((route) => (
                     <Link key={route.name} href={route.path}>
                       <a
