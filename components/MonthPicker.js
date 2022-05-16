@@ -52,7 +52,7 @@ export default function MonthPicker({ date }) {
     <Popover>
       <Popover.Button
         ref={setReferenceElement}
-        className='flex flex-row px-4 py-2 text-white bg-yellow-500 rounded-sm shadow-md bg-opacity-20 hover:bg-opacity-60'
+        className='flex flex-row px-4 py-2 bg-yellow-500 rounded-sm shadow-md text-neutral-100 bg-opacity-20 hover:bg-opacity-60'
       >
         <p className='text-base font-semibold tracking-wide'>{`${monthName(
           dateValue

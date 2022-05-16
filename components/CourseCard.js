@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
-import Heading from './Heading'
 import Separator from './Separator'
 
 export default function CourseCard({
@@ -9,11 +8,11 @@ export default function CourseCard({
     attributes: {
       title,
       subtitle,
-      schedule,
       startDate,
       slug,
       inscriptionsOpen,
       summary,
+      onlyRecorded,
       coverImage: {
         data: {
           attributes: {
@@ -44,42 +43,46 @@ export default function CourseCard({
         />
       </div>
       <div
-        className={`py-3 ${
+        className={`py-4 ${
           !pictureOnRight ? 'md:-ml-5' : 'md:-mr-5'
-        } text-neutral-200 bg-gray-800 rounded-lg flex-[5] mx-auto flex flex-col tracking-widest bg-opacity-50 justify-center min-h-[30rem] 3xl:min-h-[32rem] w-11/12 my-2 md:my-0 border border-yellow-500 border-opacity-20`}
+        } bg-zinc-900 rounded-lg flex-[5] mx-auto flex flex-col tracking-widest bg-opacity-80 justify-center min-h-[30rem] 3xl:min-h-[32rem] w-11/12 my-2 md:my-0 border border-yellow-500 border-opacity-20`}
       >
-        <div className='flex flex-col px-[5%] justify-center'>
-          <div className='mb-1 text-5xl tracking-wider text-center 3xl:text-6xl'>
-            <h1>{title}</h1>
-          </div>
+        <div className='flex flex-col px-[5%] justify-center text-neutral-100'>
+          <h1 className='mb-2 text-5xl tracking-wider text-center 3xl:text-6xl'>{title}</h1>
+          <h2 className='text-xl text-center 3xl:text-2xl'>{subtitle}</h2>
+
           <Separator />
         </div>
-        <div className='flex flex-col justify-between flex-1 px-8 text-lg tracking-widest md:px-14 bg-opacity-70'>
+        <div className='flex flex-col flex-1 px-5 tracking-widest text-md 3xl:text-lg md:px-10 text-neutral-300'>
           <ReactMarkdown
             components={{
               h2: ({ node, ...props }) => (
-                <h2 className='self-center text-lg tracking-[0.2em]' {...props} />
+                <h2 className='text-center text-2xl tracking-[0.2em] mb-auto' {...props} />
               ),
-              li: ({ node, ordered, ...props }) => <li className='mb-4' {...props} />,
+              li: ({ node, ordered, ...props }) => <li className='mb-3' {...props} />,
               ul: ({ node, ordered, ...props }) => (
-                <ul className='mt-4 ml-3 list-disc' {...props} />
+                <ul className='my-auto mt-3 ml-3 list-disc list-inside md:ml-8' {...props} />
               ),
-              p: ({ node, ...props }) => <p className='self-center' {...props} />,
+              p: ({ node, ...props }) => (
+                <p className='my-auto text-center 3xl:text-xl' {...props} />
+              ),
             }}
           >
             {summary}
           </ReactMarkdown>
         </div>
-        <div className='flex flex-col justify-center'>
+        <div className='flex flex-col justify-center text-yellow-600'>
           <Separator />
           <p className='text-lg tracking-[0.15em] text-center'>
             {inscriptionsOpen
               ? `Fecha de inicio: ${new Date(startDate).toLocaleDateString('es-AR')}`
-              : 'PRÓXIMAMENTE'}
+              : !onlyRecorded
+              ? 'PRÓXIMAMENTE'
+              : 'Curso Grabado'}
           </p>
           <div className='mt-5 mb-3 text-xl text-center md:mt-3 md:mb-1'>
             <Link href={`/courses/${slug}`}>
-              <a className='tracking-[0.2em] border border-yellow-600 hover:text-yellow-500 md:border-none border-opacity-80 transition-all ease-in-out duration-200 p-2 rounded-sm'>
+              <a className='tracking-[0.2em] border border-yellow-600 hover:text-neutral-100 md:border-none border-opacity-80 transition-all ease-in-out duration-200 p-2 rounded-sm'>
                 VER MÁS
               </a>
             </Link>

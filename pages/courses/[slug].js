@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import Heading from '@/components/Heading'
 import Separator from '@/components/Separator'
 import Button from '@/components/Button'
+import qs from 'qs'
 
 export default function CoursePage({
   course: {
@@ -82,7 +83,7 @@ export default function CoursePage({
             <div className='mb-6'>
               <Heading title='Grabaciones' />
             </div>
-            <p className='my-8 text-xl tracking-widest text-center text-neutral-300'>
+            <p className='my-8 text-xl tracking-widest text-center 3xl:text-2xl text-neutral-300'>
               Adquirí este curso grabado y recibí acceso a videos y materiales
             </p>
             <Button text='acceder a grabaciones' href={recordingsFormUrl} size='lg' />
@@ -92,25 +93,45 @@ export default function CoursePage({
         <div className='mb-6'>
           <Heading title='Programa' />
         </div>
-        <ReactMarkdown className='pb-8 text-xl tracking-wide text-justify 3xl:text-2xl text-neutral-300'>
+        <ReactMarkdown
+          className='pb-8 text-xl tracking-wide text-justify 3xl:text-2xl text-neutral-300'
+          components={{
+            h2: ({ node, ...props }) => <h2 className='text-2xl 3xl:text-3xl' {...props} />,
+          }}
+        >
           {program}
         </ReactMarkdown>
-        {inscriptionsOpen && (
-          <>
-            <Separator margin='my-6' />
-            <div className='mb-6'>
-              <Heading title='Costo' />
-            </div>
-            <p className='pb-5 text-2xl tracking-widest text-center text-neutral-300'>{price}</p>
-          </>
-        )}
+        {inscriptionsOpen ||
+          (onlyRecorded && (
+            <>
+              <Separator margin='my-6' />
+              <div className='mb-6'>
+                <Heading title='Costo' />
+              </div>
+              <p className='pb-5 text-2xl tracking-widest text-center text-neutral-300'>{price}</p>
+            </>
+          ))}
       </div>
     </Layout>
   )
 }
 
 export async function getServerSideProps({ query: { slug } }) {
-  const course = await axios.get(`${API_URL}/api/courses?filters[slug][$eq]=${slug}&populate=%2A`)
+  const query = qs.stringify(
+    {
+      populate: '*',
+      filters: {
+        slug: {
+          $eq: slug,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  )
+
+  const course = await axios.get(`${API_URL}/api/courses?${query}`)
 
   return {
     props: { course: course.data.data[0] },

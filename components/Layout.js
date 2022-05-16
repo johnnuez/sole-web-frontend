@@ -69,8 +69,8 @@ export default function Layout({
       <motion.div animate={{ opacity: [0, 1] }} transition={{ duration: 1 }}>
         {router.pathname === '/' ? (
           <Hero
-            imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg'
-            title='Sole Tarot y Símbolos'
+            imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1649677006/large_0_eefb7fe9f2.jpg'
+            title='Sole Tarot & Símbolos'
             bgSize={bgSize}
           />
         ) : hero ? (

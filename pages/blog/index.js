@@ -4,12 +4,13 @@ import axios from 'axios'
 import Pagination from '@/components/Pagination'
 import MonthPicker from '@/components/MonthPicker'
 import BlogPostListCard from '@/components/BlogPostListCard'
+import qs from 'qs'
 
 export default function BlogPage({ posts, page, totalPages, date }) {
   return (
     <Layout title='Blog'>
-      <div className='flex flex-col 3xl:max-w-7xl max-w-6xl mx-auto px-[3%] py-8'>
-        <div className='self-center mb-8'>
+      <div className='flex flex-col 3xl:max-w-7xl max-w-6xl mx-auto px-[3%] py-12 min-h-[55vh] justify-around'>
+        <div className='self-center mb-12'>
           <MonthPicker date={date} />
         </div>
         <div className='grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3 gap-y-10'>
@@ -25,7 +26,7 @@ export default function BlogPage({ posts, page, totalPages, date }) {
             </p>
           )}
         </div>
-        <div className='mx-auto mt-8'>
+        <div className='mx-auto mt-12'>
           <Pagination page={page} totalPages={totalPages} date={date} />
         </div>
       </div>
@@ -42,9 +43,26 @@ export async function getServerSideProps({ query: { page = 1, date = null } }) {
   }
   date = date ? date : currentDate()
 
-  const posts = await axios.get(
-    `${API_URL}/api/posts?pagination[page]=${page}&pagination[pageSize]=${POSTS_PER_PAGE}&populate=%2A&sort[0]=publishedAt%3Adesc&filters[publishedAt][$lte]=${date}`
+  const query = qs.stringify(
+    {
+      populate: '*',
+      pagination: {
+        page: page,
+        pageSize: POSTS_PER_PAGE,
+      },
+      sort: ['publishedAt:desc'],
+      filters: {
+        publishedAt: {
+          $lte: date,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
   )
+
+  const posts = await axios.get(`${API_URL}/api/posts?${query}`)
 
   return {
     props: {

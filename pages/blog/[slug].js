@@ -2,6 +2,7 @@ import Layout from '@/components/Layout'
 import axios from 'axios'
 import { API_URL } from '@/config/index'
 import ReactMarkdown from 'react-markdown'
+import qs from 'qs'
 
 export default function PostPage({ post }) {
   return (
@@ -24,7 +25,21 @@ export default function PostPage({ post }) {
 }
 
 export async function getServerSideProps({ query: { slug } }) {
-  const post = await axios.get(`${API_URL}/api/posts?filters[slug][$eq]=${slug}&populate=%2A`)
+  const query = qs.stringify(
+    {
+      populate: '*',
+      filters: {
+        slug: {
+          $eq: slug,
+        },
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  )
+
+  const post = await axios.get(`${API_URL}/api/posts?${query}`)
 
   return {
     props: { post: post.data.data[0].attributes },

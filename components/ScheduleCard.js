@@ -15,12 +15,12 @@ export default function ScheduleCard() {
           objectFit='cover'
         />
       </div>
-      <div className='flex flex-col items-center justify-center lg:py-20 rounded-3xl 2xl:px-0 lg:flex-[5]'>
-        <p className='px-10 my-8 text-3xl tracking-wider text-center text-yellow-600 first-letter:text-5xl'>
+      <div className='flex flex-col items-center justify-center lg:py-20 rounded-3xl 2xl:px-0 lg:flex-[6]'>
+        <p className='px-10 my-8 text-4xl tracking-wider text-center text-yellow-600 first-letter:text-5xl'>
           Reservá tu turno para una sesión de tarot
         </p>
         <div className='lg:mt-5'>
-          <Button href='/schedule' text='agenda' size='2xl' />
+          <Button href='/schedule' text='agenda' size='xl' />
         </div>
       </div>
     </div>
