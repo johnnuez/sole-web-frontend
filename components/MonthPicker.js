@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Popover } from '@headlessui/react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
@@ -38,6 +38,10 @@ export default function MonthPicker({ date }) {
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: 'bottom',
   })
+
+  useEffect(() => {
+    setDateValue(new Date(date))
+  }, [date])
 
   const setDateAndRefresh = (month) => {
     const newDate = new Date(yearValue, month + 1, 0)

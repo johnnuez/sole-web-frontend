@@ -20,7 +20,7 @@ export default function Layout({
   hero = false,
   bgSize = 'bg-cover',
   heroImageUrl = 'https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg',
-  heroTitle = 'Sole tarot y símbolos',
+  heroTitle,
 }) {
   const router = useRouter()
   const [isShrunk, setIsShrunk] = useState(navBarStates.notShrunk)
@@ -70,7 +70,6 @@ export default function Layout({
         {router.pathname === '/' ? (
           <Hero
             imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1649677006/large_0_eefb7fe9f2.jpg'
-            title='Sole Tarot & Símbolos'
             bgSize={bgSize}
           />
         ) : hero ? (
@@ -88,5 +87,6 @@ export default function Layout({
 Layout.defaultProps = {
   title: 'Sole Tarot y Símbolos',
   description: 'Sole Tarot y Símbolos',
-  keywords: 'tarot, magia, simbolos, literatura, cartas, interpretacion, mistico, mitologia',
+  keywords:
+    'tarot, magia, simbolos, literatura, cartas, interpretacion, mistico, mitologia, dioses, Lenormand',
 }

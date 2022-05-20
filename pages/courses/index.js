@@ -37,7 +37,7 @@ export async function getServerSideProps() {
   const query = qs.stringify(
     {
       populate: '*',
-      sort: ['startDate:desc'],
+      sort: ['startDate:desc', 'title'],
     },
     {
       encodeValuesOnly: true,

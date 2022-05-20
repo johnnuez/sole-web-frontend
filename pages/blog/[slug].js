@@ -16,7 +16,16 @@ export default function PostPage({ post }) {
         <p className='mb-5 text-xl text-justify'>
           {new Date(post.publishedAt).toLocaleDateString('es-AR')}
         </p>
-        <ReactMarkdown className='py-5 text-xl text-justify 3xl:text-2xl first-letter:text-5xl'>
+        <ReactMarkdown
+          className='py-5 text-xl text-justify 3xl:text-2xl'
+          components={{
+            h2: ({ node, ...props }) => <h2 className='text-2xl 3xl:text-3xl' {...props} />,
+            li: ({ node, ordered, ...props }) => <li className='mb-3' {...props} />,
+            ul: ({ node, ordered, ...props }) => (
+              <ul className='my-5 list-disc list-inside' {...props} />
+            ),
+          }}
+        >
           {post.content}
         </ReactMarkdown>
       </div>

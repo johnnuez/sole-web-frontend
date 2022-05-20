@@ -5,13 +5,36 @@ import Pagination from '@/components/Pagination'
 import MonthPicker from '@/components/MonthPicker'
 import BlogPostListCard from '@/components/BlogPostListCard'
 import qs from 'qs'
+import { useRouter } from 'next/router'
+
+const currentDate = () => {
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = today.getMonth()
+  return new Date(year, month + 1, 0).toISOString().substring(0, 10)
+}
 
 export default function BlogPage({ posts, page, totalPages, date }) {
+  const router = useRouter()
+
   return (
     <Layout title='Blog'>
       <div className='flex flex-col 3xl:max-w-7xl max-w-6xl mx-auto px-[3%] py-12 min-h-[55vh] justify-around'>
-        <div className='self-center mb-12'>
+        <div className='flex flex-col items-center self-center mb-8'>
           <MonthPicker date={date} />
+          <div className='mt-5 text-center bg-yellow-500 rounded-sm bg-opacity-20 hover:bg-opacity-60'>
+            <button
+              className='w-full px-4 py-2 font-semibold tracking-widest text-neutral-100'
+              onClick={() => {
+                router.push({
+                  pathname: '/blog',
+                  query: { date: currentDate() },
+                })
+              }}
+            >
+              <p>Ver últimos posts</p>
+            </button>
+          </div>
         </div>
         <div className='grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3 gap-y-10'>
           {posts.length > 0 ? (
@@ -35,12 +58,6 @@ export default function BlogPage({ posts, page, totalPages, date }) {
 }
 
 export async function getServerSideProps({ query: { page = 1, date = null } }) {
-  const currentDate = () => {
-    const today = new Date()
-    const year = today.getFullYear()
-    const month = today.getMonth()
-    return new Date(year, month + 1, 0).toISOString().substring(0, 10)
-  }
   date = date ? date : currentDate()
 
   const query = qs.stringify(

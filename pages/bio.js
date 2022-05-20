@@ -8,7 +8,7 @@ export default function BioPage() {
         <div className='flex-1 mb-5 shadow-xl'>
           <Image
             src='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1651588084/large_bio_e01f8fb3b5.jpg'
-            alt=''
+            alt='bio_image'
             layout='responsive'
             objectFit='cover'
             objectPosition='center'

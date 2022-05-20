@@ -26,10 +26,11 @@ export default function Header({ isShrunk }) {
 
   return (
     <motion.div
-      className='sticky top-0 z-50 w-full bg-opacity-90 md:pb-20 md:pt-10 bg-zinc-900 backdrop-blur-sm shadow-[0_1.5px_5px_0_rgba(0,0,0,0.5)]'
+      className={`sticky top-0 z-50 w-full bg-opacity-90 md:pb-20 md:pt-10 bg-zinc-900 backdrop-blur-sm shadow-[0_1.5px_5px_0_rgba(0,0,0,0.5)]`}
       animate={isShrunk}
       variants={variants}
       transition={{ duration: 1 }}
+      whileHover={{ opacity: 1 }}
     >
       <div className='px-4 mx-auto md:pt-16 max-w-7xl sm:px-6 lg:px-8'>
         <div className='flex items-center justify-between h-16 md:justify-center'>
@@ -54,7 +55,7 @@ export default function Header({ isShrunk }) {
                     >
                       <div className='absolute -top-[1.15rem] -left-[1.15rem]'>
                         <Image
-                          alt=''
+                          alt='header_image'
                           src='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1649872673/small_cloud_eye_010821_f1b7b046ad.png'
                           layout='fixed'
                           width='180'

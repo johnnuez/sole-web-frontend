@@ -11,7 +11,6 @@ export default function CoursePage({
   course: {
     attributes: {
       title,
-      subtitle,
       schedule,
       startDate,
       program,
@@ -97,20 +96,23 @@ export default function CoursePage({
           className='pb-8 text-xl tracking-wide text-justify 3xl:text-2xl text-neutral-300'
           components={{
             h2: ({ node, ...props }) => <h2 className='text-2xl 3xl:text-3xl' {...props} />,
+            li: ({ node, ordered, ...props }) => <li className='mb-3' {...props} />,
+            ul: ({ node, ordered, ...props }) => (
+              <ul className='list-disc list-inside' {...props} />
+            ),
           }}
         >
           {program}
         </ReactMarkdown>
-        {inscriptionsOpen ||
-          (onlyRecorded && (
-            <>
-              <Separator margin='my-6' />
-              <div className='mb-6'>
-                <Heading title='Costo' />
-              </div>
-              <p className='pb-5 text-2xl tracking-widest text-center text-neutral-300'>{price}</p>
-            </>
-          ))}
+        {(inscriptionsOpen || onlyRecorded) && (
+          <>
+            <Separator margin='my-6' />
+            <div className='mb-6'>
+              <Heading title='Costo' />
+            </div>
+            <p className='pb-5 text-2xl tracking-widest text-center text-neutral-300'>{price}</p>
+          </>
+        )}
       </div>
     </Layout>
   )
