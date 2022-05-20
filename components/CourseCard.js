@@ -14,13 +14,7 @@ export default function CourseCard({
       summary,
       onlyRecorded,
       coverImage: {
-        data: {
-          attributes: {
-            formats: {
-              large: { url },
-            },
-          },
-        },
+        data: { attributes: image },
       },
     },
   },
@@ -34,11 +28,11 @@ export default function CourseCard({
         }`}
       >
         <Image
-          src={`${url}`}
+          src={`${image.formats.large.url}`}
           layout='responsive'
           width='100%'
           height='100%'
-          alt=''
+          alt={image.alternativeText}
           className='flex-1 rounded-lg'
         />
       </div>
@@ -97,11 +91,11 @@ export default function CourseCard({
         }`}
       >
         <Image
-          src={`${url}`}
+          src={`${image.formats.large.url}`}
           layout='responsive'
           width='100%'
           height='100%'
-          alt=''
+          alt={image.alternativeText}
           className='flex-1 rounded-lg shadow-lg'
         />
       </div>

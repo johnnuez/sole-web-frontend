@@ -10,7 +10,7 @@ export default function ScheduleCard() {
           layout='responsive'
           width={100}
           height={100}
-          alt=''
+          alt='schedule_image'
           className='rounded-full opacity-90'
           objectFit='cover'
         />

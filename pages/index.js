@@ -56,7 +56,7 @@ export default function Home({ posts, course }) {
             transition={{ duration: 3 }}
           >
             <div className='py-8'>
-              <div className='hidden max-w-6xl mx-auto lg:grid lg:grid-flow-col justify-items-center 3xl:max-w-7xl bg-opacity-10 rounded-xl px-[1%]'>
+              <div className='hidden max-w-6xl gap-1 mx-auto lg:grid lg:grid-flow-col justify-items-center 3xl:max-w-7xl bg-opacity-10 rounded-xl'>
                 {posts &&
                   posts.map((post, i) => (
                     <BlogPostCard index={i} key={post.id} post={post.attributes} />
@@ -96,7 +96,7 @@ export async function getServerSideProps() {
         start: 0,
         limit: 1,
       },
-      sort: ['startDate:desc'],
+      sort: ['startDate:desc', 'title'],
       filters: {
         $or: [
           {

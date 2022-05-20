@@ -24,10 +24,10 @@ export default function BlogPostCard({ post, index = 0, duration = 2 }) {
       style={{ transformStyle: 'preserve-3d', cursor: 'pointer' }}
     >
       <motion.div
-        className='absolute w-full h-full overflow-hidden bg-black bg-center bg-no-repeat bg-cover rounded-md bg-opacity-40 bg-blend-overlay'
+        className='absolute w-full h-full overflow-hidden bg-center bg-no-repeat bg-cover rounded-md bg-neutral-400 bg-opacity-90 bg-blend-difference'
         style={{
           backfaceVisibility: 'hidden',
-          backgroundImage: `url('https://res.cloudinary.com/dpvmqdpwk/image/upload/v1647537073/v743_tang_10_5b66b2f264.jpg')`,
+          backgroundImage: `url('https://res.cloudinary.com/dpvmqdpwk/image/upload/v1652971300/DSC_0008_e99d2fc4cf.jpg')`,
         }}
       ></motion.div>
       <motion.div style={{ backfaceVisibility: 'hidden', rotateY: 180 }}>
@@ -35,7 +35,7 @@ export default function BlogPostCard({ post, index = 0, duration = 2 }) {
           <a>
             <div
               style={{ backgroundImage: `url(${post.image.data.attributes.formats.medium.url})` }}
-              className='flex flex-col bg-center bg-cover rounded-md h-[26rem] w-[18rem] 3xl:h-[30rem] 3xl:w-[21rem] bg-black bg-opacity-70 lg:bg-opacity-20 lg:bg-blend-color bg-blend-multiply lg:hover:shadow-[0_0_20px_8px_rgba(0,0,0,0.5)] transition-shadow ease-in-out duration-1000'
+              className='flex flex-col bg-center bg-cover rounded-md h-[27rem] w-[17rem] 3xl:h-[31rem] 3xl:w-[21rem] bg-gray-900 bg-opacity-90 lg:bg-opacity-50 lg:bg-blend-darken bg-blend-multiply lg:hover:shadow-[0_0_20px_8px_rgba(0,0,0,0.5)] transition-shadow ease-in-out duration-1000'
             >
               <motion.div
                 whileHover='hover'

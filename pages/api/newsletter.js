@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 const getRequestParams = (email) => {
-  //get env variables with mailchimp api key and list id
   const API_KEY = process.env.MAILCHIMP_API_KEY
   const LIST_ID = process.env.MAILCHIMP_LIST_ID
 
@@ -44,7 +43,7 @@ export default async function handler(req, res) {
     const errorMessage =
       error.response.data.title === 'Member Exists'
         ? 'Ya estás suscrito/a!'
-        : 'Ocurrió un error. Por favor enviame un mail a xxxxx@mail.com para recibir el newsletter.'
+        : 'Ocurrió un error. Por favor enviame un mail a sole.tarotysimbolos@gmail.com para recibir el newsletter.'
     return res.status(400).json({
       error: errorMessage,
     })
