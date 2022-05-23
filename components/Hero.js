@@ -1,9 +1,7 @@
 export default function Hero({ imageUrl, title, bgSize }) {
   return (
     <div
-      className={`h-[49rem] max-h-[95vh] mt-[-16rem] opacity-95 ${bgSize} bg-fixed bg-black bg-opacity-75 shadow-lg bg-blend-color ${
-        title ? 'bg-center' : ''
-      }`}
+      className={`h-[49rem] max-h-[95vh] mt-[-16rem] opacity-95 ${bgSize} lg:bg-fixed bg-black bg-opacity-75 shadow-lg bg-blend-color bg-center bg-cover`}
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
       <div className='flex items-center justify-center w-full h-full backdrop-blur-sm'>

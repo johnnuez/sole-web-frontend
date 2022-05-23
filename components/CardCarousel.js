@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-const swipeConfidenceThreshold = 10
+const swipeConfidenceThreshold = 9999
 const swipePower = (offset, velocity) => {
   return Math.abs(offset) * velocity
 }

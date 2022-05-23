@@ -18,7 +18,7 @@ export default function Header({ isShrunk }) {
       y: -188,
     },
     [navBarStates.smallNavBarShrunk]: {
-      opacity: 0.8,
+      opacity: 0.9,
       y: -15,
     },
     [navBarStates.notShrunk]: {},
