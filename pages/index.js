@@ -28,9 +28,19 @@ export default function Home({ posts, course }) {
             <div className='py-3'>{course && <CourseCard course={course} />}</div>
           </motion.div>
           {course.attributes.onlyRecorded ? (
-            <Button text='Adquirir curso' href={course.attributes.recordingsFormUrl} size='lg' />
+            <Button
+              text='Adquirir curso'
+              href={course.attributes.recordingsFormUrl}
+              size='lg'
+              externalLink
+            />
           ) : (
-            <Button text='inscripciones' href={course.attributes.inscriptionFormUrl} size='lg' />
+            <Button
+              text='inscripciones'
+              href={course.attributes.inscriptionFormUrl}
+              size='lg'
+              externalLink
+            />
           )}
         </Section>
       </div>

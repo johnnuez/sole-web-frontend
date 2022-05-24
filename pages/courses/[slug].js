@@ -38,7 +38,7 @@ export default function CoursePage({
               <Heading title='Inscripciones' />
             </div>
             {inscriptionsOpen ? (
-              <Button text='ir al formulario' href={inscriptionFormUrl} size='xl' />
+              <Button text='ir al formulario' href={inscriptionFormUrl} size='xl' externalLink />
             ) : (
               <p className='text-2xl tracking-widest text-center text-neutral-300'>PRÓXIMAMENTE</p>
             )}
@@ -50,7 +50,12 @@ export default function CoursePage({
                 <p className='mb-8 text-2xl tracking-widest text-center text-neutral-300'>
                   Anotate en la lista de interesados y recibí noticias de este curso en tu email
                 </p>
-                <Button text='formulario de interesados' href={waitListFormUrl} size='lg' />
+                <Button
+                  text='formulario de interesados'
+                  href={waitListFormUrl}
+                  size='lg'
+                  externalLink
+                />
                 <Separator margin='my-6' />
               </>
             )}
@@ -82,7 +87,7 @@ export default function CoursePage({
             <p className='my-8 text-xl tracking-widest text-center 3xl:text-2xl text-neutral-300'>
               Adquirí este curso grabado y recibí acceso a videos y materiales
             </p>
-            <Button text='acceder a grabaciones' href={recordingsFormUrl} size='lg' />
+            <Button text='acceder a grabaciones' href={recordingsFormUrl} size='lg' externalLink />
             <Separator margin='my-6' />
           </>
         )}
