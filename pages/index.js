@@ -18,7 +18,7 @@ export default function Home({ posts, course }) {
   return (
     <Layout>
       <div className='px-[2%] md:px-[8%] py-12'>
-        <Section title='Cursos & Talleres'>
+        <Section title='Cursos & Talleres' blurOnMobile>
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             viewport={{ once: true }}
@@ -35,7 +35,7 @@ export default function Home({ posts, course }) {
         </Section>
       </div>
       <div className='px-[2%] md:px-[8%] pb-12'>
-        <Section>
+        <Section blurOnMobile>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             viewport={{ once: true }}

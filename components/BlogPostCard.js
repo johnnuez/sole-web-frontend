@@ -21,16 +21,23 @@ export default function BlogPostCard({ post, index = 0, duration = 2 }) {
       viewport={{ once: true }}
       transition={{ duration: duration, delay: index * 0.8 }}
       className='relative border border-yellow-500 rounded-md border-opacity-20'
-      style={{ transformStyle: 'preserve-3d', cursor: 'pointer' }}
+      style={{
+        transformStyle: 'preserve-3d',
+        cursor: 'pointer',
+        WebkitTransformStyle: 'preserve-3d',
+      }}
     >
       <motion.div
         className='absolute w-full h-full overflow-hidden bg-center bg-no-repeat bg-cover rounded-md bg-neutral-400 bg-opacity-90 bg-blend-difference'
         style={{
           backfaceVisibility: 'hidden',
+          WebkitBackfaceVisibility: 'hidden',
           backgroundImage: `url('https://res.cloudinary.com/dpvmqdpwk/image/upload/v1652971300/DSC_0008_e99d2fc4cf.jpg')`,
         }}
       ></motion.div>
-      <motion.div style={{ backfaceVisibility: 'hidden', rotateY: 180 }}>
+      <motion.div
+        style={{ backfaceVisibility: 'hidden', rotateY: 180, WebkitBackfaceVisibility: 'hidden' }}
+      >
         <Link href={`/blog/${post.slug}`}>
           <a>
             <div
