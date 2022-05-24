@@ -6,6 +6,7 @@ import Heading from '@/components/Heading'
 import Separator from '@/components/Separator'
 import Button from '@/components/Button'
 import qs from 'qs'
+import { longDate } from 'utils/dateParser'
 
 export default function CoursePage({
   course: {
@@ -59,11 +60,7 @@ export default function CoursePage({
                   <Heading title='Comienzo' />
                 </div>
                 <p className='text-2xl tracking-widest text-center text-neutral-300'>
-                  {new Intl.DateTimeFormat('es-AR', {
-                    month: 'long',
-                    year: 'numeric',
-                    day: 'numeric',
-                  }).format(new Date(startDate))}
+                  {longDate(startDate)}
                 </p>
                 <Separator margin='my-6' />
                 <div className='mb-6'>

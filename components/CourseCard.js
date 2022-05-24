@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import ReactMarkdown from 'react-markdown'
+import { shortDate } from 'utils/dateParser'
 import Separator from './Separator'
 
 export default function CourseCard({
@@ -69,7 +70,7 @@ export default function CourseCard({
           <Separator />
           <p className='text-lg tracking-[0.15em] text-center'>
             {inscriptionsOpen
-              ? `Fecha de inicio: ${new Date(startDate).toLocaleDateString('es-AR')}`
+              ? `Fecha de inicio: ${shortDate(startDate)}`
               : !onlyRecorded
               ? 'PRÓXIMAMENTE'
               : 'Curso Grabado'}

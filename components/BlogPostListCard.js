@@ -19,7 +19,7 @@ export default function BlogPostListCard({ post }) {
           </div>
           <div className='px-5 opacity-80'>
             <p className='py-2 text-sm font-semibold text-amber-50'>
-              {new Date(post.publishedAt).toLocaleDateString('es-AR')}
+              {new Date(post.publishedAt).toLocaleDateString()}
             </p>
             <p className='pt-4 text-xl tracking-wide 3xl:text-2xl text-neutral-100 line-clamp-5'>
               {post.title}

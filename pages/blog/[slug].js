@@ -14,7 +14,7 @@ export default function PostPage({ post }) {
     >
       <div className='max-w-3xl px-6 py-8 mx-auto tracking-wide 3xl:max-w-4xl text-neutral-300'>
         <p className='mb-5 text-xl text-justify'>
-          {new Date(post.publishedAt).toLocaleDateString('es-AR')}
+          {new Date(post.publishedAt).toLocaleDateString()}
         </p>
         <ReactMarkdown
           className='py-5 text-xl text-justify 3xl:text-2xl'
