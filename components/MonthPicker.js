@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Popover } from '@headlessui/react'
 import { motion } from 'framer-motion'
-import { useRouter } from 'next/router'
 import { usePopper } from 'react-popper'
 
 const yearsPanelVariants = {
@@ -28,11 +27,10 @@ const yearsArray = () => {
   return yearsArr
 }
 
-export default function MonthPicker({ date }) {
+export default function MonthPicker({ date, setDate, setPage }) {
   const [dateValue, setDateValue] = useState(new Date(date))
   const [yearsPanelOpen, setYearsPanelOpen] = useState(false)
   const [yearValue, setYearValue] = useState(Number(dateValue.getFullYear()))
-  const router = useRouter()
   const [referenceElement, setReferenceElement] = useState()
   const [popperElement, setPopperElement] = useState()
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
@@ -45,11 +43,8 @@ export default function MonthPicker({ date }) {
 
   const setDateAndRefresh = (month) => {
     const newDate = new Date(yearValue, month + 1, 0)
-    router.push({
-      pathname: '/blog',
-      query: { date: newDate.toISOString().substring(0, 10) },
-    })
-    setDateValue(newDate)
+    setDate(newDate)
+    setPage(1)
   }
 
   return (
