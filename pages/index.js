@@ -9,11 +9,87 @@ import Button from '@/components/Button'
 import { motion } from 'framer-motion'
 import ScheduleCard from '@/components/ScheduleCard'
 import qs from 'qs'
+import useSWR from 'swr'
+import Custom500Page from './500'
 
-export default function Home({ posts, course }) {
-  const blogCardsArray = posts.map((post) => (
-    <BlogPostCard duration={1} key={post.id} post={post.attributes} />
-  ))
+const postsQuery = qs.stringify(
+  {
+    populate: '*',
+    pagination: {
+      start: 0,
+      limit: 3,
+    },
+    sort: ['publishedAt:desc'],
+  },
+  {
+    encodeValuesOnly: true,
+  }
+)
+
+const courseQuery = qs.stringify(
+  {
+    populate: '*',
+    pagination: {
+      start: 0,
+      limit: 1,
+    },
+    sort: ['startDate:desc', 'title'],
+    filters: {
+      $or: [
+        {
+          inscriptionsOpen: {
+            $eq: true,
+          },
+        },
+        {
+          onlyRecorded: {
+            $eq: true,
+          },
+        },
+      ],
+    },
+  },
+  {
+    encodeValuesOnly: true,
+  }
+)
+const courseFetcher = (url) => axios.get(url).then((res) => res.data.data[0])
+const postsFetcher = (url) => axios.get(url).then((res) => res.data.data)
+
+export default function Home({ fallback }) {
+  const { data: course, error: courseError } = useSWR(
+    `${API_URL}/api/courses?${courseQuery}`,
+    courseFetcher,
+    {
+      fallbackData: fallback[`${API_URL}/api/courses?${courseQuery}`],
+    }
+  )
+  const { data: posts, error: postsError } = useSWR(
+    `${API_URL}/api/posts?${postsQuery}`,
+    postsFetcher,
+    {
+      fallbackData: fallback[`${API_URL}/api/posts?${postsQuery}`],
+    }
+  )
+
+  if (courseError || postsError) {
+    return (
+      <Layout>
+        <Custom500Page />
+      </Layout>
+    )
+  }
+  if (!course || !posts) {
+    return (
+      <Layout>
+        <p>Loading</p>
+      </Layout>
+    )
+  }
+
+  const blogCardsArray = posts
+    ? posts.map((post) => <BlogPostCard duration={1} key={post.id} post={post.attributes} />)
+    : []
 
   return (
     <Layout>
@@ -27,7 +103,7 @@ export default function Home({ posts, course }) {
           >
             <div className='py-3'>{course && <CourseCard course={course} />}</div>
           </motion.div>
-          {course.attributes.onlyRecorded ? (
+          {course && course.attributes.onlyRecorded ? (
             <Button
               text='Adquirir curso'
               href={course.attributes.recordingsFormUrl}
@@ -84,54 +160,18 @@ export default function Home({ posts, course }) {
   )
 }
 
-export async function getServerSideProps() {
-  const postsQuery = qs.stringify(
-    {
-      populate: '*',
-      pagination: {
-        start: 0,
-        limit: 3,
-      },
-      sort: ['publishedAt:desc'],
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  )
-
-  const courseQuery = qs.stringify(
-    {
-      populate: '*',
-      pagination: {
-        start: 0,
-        limit: 1,
-      },
-      sort: ['startDate:desc', 'title'],
-      filters: {
-        $or: [
-          {
-            inscriptionsOpen: {
-              $eq: true,
-            },
-          },
-          {
-            onlyRecorded: {
-              $eq: true,
-            },
-          },
-        ],
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  )
-
+export async function getStaticProps() {
   const posts = await axios.get(`${API_URL}/api/posts?${postsQuery}`)
 
   const course = await axios.get(`${API_URL}/api/courses?${courseQuery}`)
 
   return {
-    props: { posts: posts.data.data, course: course.data.data[0] },
+    props: {
+      fallback: {
+        [`${API_URL}/api/posts?${postsQuery}`]: posts.data.data,
+        [`${API_URL}/api/courses?${courseQuery}`]: course.data.data[0],
+      },
+    },
+    revalidate: 1,
   }
 }
