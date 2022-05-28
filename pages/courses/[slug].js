@@ -10,6 +10,9 @@ import { longDate } from 'utils/dateParser'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Custom404Page from 'pages/404'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import Custom500Page from 'pages/500'
 
 const query = (slug) =>
   qs.stringify(
@@ -35,14 +38,24 @@ export default function CoursePage() {
   if (error) {
     return (
       <Layout>
-        <p>Error</p>
+        <Custom500Page />
       </Layout>
     )
   }
   if (!data) {
     return (
-      <Layout>
-        <p>Loading</p>
+      <Layout hero heroLoading>
+        <div className='max-w-3xl px-6 py-8 mx-auto text-center 3xl:max-w-4xl'>
+          <h1 className='mb-6 text-4xl'>
+            <Skeleton baseColor='#3f3f46' highlightColor='#ca8a04' width='30%' />
+          </h1>
+          <p className='mb-6 text-xl'>
+            <Skeleton baseColor='#3f3f46' highlightColor='#ca8a04' count={10} className='mb-2' />
+          </p>
+          <p className='text-xl '>
+            <Skeleton baseColor='#3f3f46' highlightColor='#ca8a04' count={10} className='mb-2' />
+          </p>
+        </div>
       </Layout>
     )
   }

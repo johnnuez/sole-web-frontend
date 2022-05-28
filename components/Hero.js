@@ -1,4 +1,15 @@
-export default function Hero({ imageUrl, title, bgSize }) {
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
+export default function Hero({ imageUrl, title, bgSize, loading = false }) {
+  if (loading) {
+    return (
+      <div className='mt-[-16rem] opacity-20'>
+        <Skeleton height='42rem' baseColor='#3f3f46' highlightColor='#ca8a04' />
+      </div>
+    )
+  }
+
   return (
     <div
       className={`h-[49rem] max-h-[95vh] mt-[-16rem] opacity-95 ${bgSize} lg:bg-fixed bg-black bg-opacity-75 shadow-lg bg-blend-color bg-center bg-cover`}

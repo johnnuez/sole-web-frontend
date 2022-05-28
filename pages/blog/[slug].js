@@ -6,6 +6,9 @@ import qs from 'qs'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Custom404Page from 'pages/404'
+import Custom500Page from 'pages/500'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const query = (slug) =>
   qs.stringify(
@@ -31,14 +34,24 @@ export default function PostPage({ post }) {
   if (error) {
     return (
       <Layout>
-        <p>Error</p>
+        <Custom500Page />
       </Layout>
     )
   }
   if (!data) {
     return (
-      <Layout>
-        <p>Loading</p>
+      <Layout hero heroLoading>
+        <div className='max-w-3xl px-6 py-8 mx-auto 3xl:max-w-4xl'>
+          <p className='mb-6 text-xl text-justify'>
+            <Skeleton baseColor='#3f3f46' highlightColor='#ca8a04' width='20%' />
+          </p>
+          <p className='mb-6 text-center'>
+            <Skeleton baseColor='#3f3f46' highlightColor='#ca8a04' count={10} className='mb-2' />
+          </p>
+          <p className='text-center'>
+            <Skeleton baseColor='#3f3f46' highlightColor='#ca8a04' count={10} className='mb-2' />
+          </p>
+        </div>
       </Layout>
     )
   }
