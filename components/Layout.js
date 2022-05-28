@@ -21,6 +21,7 @@ export default function Layout({
   bgSize = 'bg-cover',
   heroImageUrl = 'https://res.cloudinary.com/dpvmqdpwk/image/upload/v1645638306/hero_Image_fce74872dd.jpg',
   heroTitle,
+  heroLoading,
 }) {
   const router = useRouter()
   const [isShrunk, setIsShrunk] = useState(navBarStates.notShrunk)
@@ -71,9 +72,10 @@ export default function Layout({
           <Hero
             imageUrl='https://res.cloudinary.com/dpvmqdpwk/image/upload/v1649677006/large_0_eefb7fe9f2.jpg'
             bgSize={bgSize}
+            loading={heroLoading}
           />
         ) : hero ? (
-          <Hero imageUrl={heroImageUrl} title={heroTitle} bgSize={bgSize} />
+          <Hero imageUrl={heroImageUrl} title={heroTitle} bgSize={bgSize} loading={heroLoading} />
         ) : (
           ''
         )}
