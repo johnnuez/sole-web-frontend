@@ -25,7 +25,7 @@ const currentDate = () => {
   const today = new Date()
   const year = today.getFullYear()
   const month = today.getMonth()
-  return new Date(year, month + 1, 0).toISOString().substring(0, 10)
+  return new Date(year, month + 1, 0, 23, 59, 59)
 }
 
 export default function BlogPage({ posts }) {
@@ -38,7 +38,7 @@ export default function BlogPage({ posts }) {
   const [filteredPosts, setFilteredPosts] = useState(data)
 
   useEffect(() => {
-    setFilteredPosts(data.filter((post) => new Date(post.attributes.publishedAt) < new Date(date)))
+    setFilteredPosts(data.filter((post) => new Date(post.attributes.publishedAt) <= new Date(date)))
   }, [page, date, data])
 
   if (error) {
