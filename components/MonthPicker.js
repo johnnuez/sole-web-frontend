@@ -42,7 +42,7 @@ export default function MonthPicker({ date, setDate, setPage }) {
   }, [date])
 
   const setDateAndRefresh = (month) => {
-    const newDate = new Date(yearValue, month + 1, 0)
+    const newDate = new Date(yearValue, month + 1, 0, 23, 59, 59)
     setDate(newDate)
     setPage(1)
   }
