@@ -4,22 +4,15 @@ import axios from 'axios'
 import Pagination from '@/components/Pagination'
 import MonthPicker from '@/components/MonthPicker'
 import BlogPostListCard from '@/components/BlogPostListCard'
-import qs from 'qs'
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import Custom500Page from 'pages/500'
+import { postsQueryCreator } from 'queries/posts'
+import { swrFetcher } from 'utils/swrFetcher'
 
-const query = qs.stringify(
-  {
-    populate: '*',
-    sort: ['publishedAt:desc'],
-  },
-  {
-    encodeValuesOnly: true,
-  }
-)
+const query = postsQueryCreator()
 
-const fetcher = (url) => axios.get(url).then((res) => res.data.data)
+const fetcher = swrFetcher
 
 const currentDate = () => {
   const today = new Date()
@@ -42,16 +35,13 @@ export default function BlogPage({ posts }) {
   }, [page, date, data])
 
   if (error) {
-    return (
-      <Layout>
-        <Custom500Page />
-      </Layout>
-    )
+    return <Custom500Page />
   }
   if (!data) {
     return (
       <Layout>
         <p>Loading</p>
+        {/* TODO blog posts loading skeletons */}
       </Layout>
     )
   }

@@ -1,42 +1,26 @@
 import Layout from '@/components/Layout'
-import axios from 'axios'
 import { API_URL } from '@/config/index'
 import ReactMarkdown from 'react-markdown'
-import qs from 'qs'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import Custom404Page from 'pages/404'
 import Custom500Page from 'pages/500'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { singlePostQueryCreator } from 'queries/posts'
+import { swrFetcher } from 'utils/swrFetcher'
 
-const query = (slug) =>
-  qs.stringify(
-    {
-      populate: '*',
-      filters: {
-        slug: {
-          $eq: slug,
-        },
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  )
-
-const fetcher = (url) => axios.get(url).then((res) => res.data.data)
+const fetcher = swrFetcher
 
 export default function PostPage({ post }) {
   const router = useRouter()
-  const { data, error } = useSWR(`${API_URL}/api/posts?${query(router.query.slug)}`, fetcher)
+  const { data, error } = useSWR(
+    `${API_URL}/api/posts?${singlePostQueryCreator(router.query.slug)}`,
+    fetcher
+  )
 
   if (error) {
-    return (
-      <Layout>
-        <Custom500Page />
-      </Layout>
-    )
+    return <Custom500Page />
   }
   if (!data) {
     return (

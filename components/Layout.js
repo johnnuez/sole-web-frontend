@@ -60,7 +60,7 @@ export default function Layout({
   }, [])
 
   return (
-    <div className='flex flex-col min-h-screen bg-gradient-to-t from-neutral-900 to-neutral-900'>
+    <div className='flex flex-col min-h-screen bg-neutral-900'>
       <Head>
         <title>{title}</title>
         <meta name='description' content={description}></meta>

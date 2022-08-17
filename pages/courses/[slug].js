@@ -1,11 +1,9 @@
 import Layout from '@/components/Layout'
-import axios from 'axios'
 import { API_URL } from '@/config/index'
 import ReactMarkdown from 'react-markdown'
 import Heading from '@/components/Heading'
 import Separator from '@/components/Separator'
 import Button from '@/components/Button'
-import qs from 'qs'
 import { longDate } from 'utils/dateParser'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
@@ -13,34 +11,20 @@ import Custom404Page from 'pages/404'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 import Custom500Page from 'pages/500'
+import { singleCourseQueryCreator } from 'queries/courses'
+import { swrFetcher } from 'utils/swrFetcher'
 
-const query = (slug) =>
-  qs.stringify(
-    {
-      populate: '*',
-      filters: {
-        slug: {
-          $eq: slug,
-        },
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  )
-
-const fetcher = (url) => axios.get(url).then((res) => res.data.data)
+const fetcher = swrFetcher
 
 export default function CoursePage() {
   const router = useRouter()
-  const { data, error } = useSWR(`${API_URL}/api/courses?${query(router.query.slug)}`, fetcher)
+  const { data, error } = useSWR(
+    `${API_URL}/api/courses?${singleCourseQueryCreator(router.query.slug)}`,
+    fetcher
+  )
 
   if (error) {
-    return (
-      <Layout>
-        <Custom500Page />
-      </Layout>
-    )
+    return <Custom500Page />
   }
   if (!data) {
     return (

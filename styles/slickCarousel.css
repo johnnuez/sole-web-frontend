@@ -1,0 +1,41 @@
+.slick-track {
+  display: flex !important;
+  align-items: center !important;
+}
+
+@media only screen and (min-width: 0px) {
+  .slick-next {
+    right: -10px !important;
+  }
+  .slick-prev {
+    left: -10px !important;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .slick-next {
+    right: -50px !important;
+  }
+  .slick-prev {
+    left: -50px !important;
+  }
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 20 !important;
+  opacity: 80% !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 45px !important;
+  color: #ca8a04 !important;
+  opacity: 100 !important;
+}
+
+li.slick-active button:before {
+  color: white !important;
+}
