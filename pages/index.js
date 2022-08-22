@@ -1,146 +1,81 @@
 import BlogPostCard from '@/components/BlogPostCard'
-import CardCarousel from '@/components/CardCarousel'
 import Layout from '@/components/Layout'
 import Section from '@/components/Section'
 import { API_URL } from '@/config/index'
 import axios from 'axios'
 import CourseCard from '@/components/CourseCard'
 import Button from '@/components/Button'
-import { motion } from 'framer-motion'
 import ScheduleCard from '@/components/ScheduleCard'
-import qs from 'qs'
 import useSWR from 'swr'
 import Custom500Page from './500'
+import SlickCarousel from '@/components/SlickCarousel'
+import AnimatedDiv from '@/components/AnimatedDiv'
+import { postsQueryCreator } from 'queries/posts'
+import { openCoursesQueryCreator } from 'queries/courses'
+import { swrFetcher } from 'utils/swrFetcher'
 
-const postsQuery = qs.stringify(
-  {
-    populate: '*',
-    pagination: {
-      start: 0,
-      limit: 3,
-    },
-    sort: ['publishedAt:desc'],
-  },
-  {
-    encodeValuesOnly: true,
-  }
-)
+const postsQuery = postsQueryCreator(3)
+const coursesQuery = openCoursesQueryCreator(5)
 
-const courseQuery = qs.stringify(
-  {
-    populate: '*',
-    pagination: {
-      start: 0,
-      limit: 1,
-    },
-    sort: ['startDate:desc', 'title'],
-    filters: {
-      $or: [
-        {
-          inscriptionsOpen: {
-            $eq: true,
-          },
-        },
-        {
-          onlyRecorded: {
-            $eq: true,
-          },
-        },
-      ],
-    },
-  },
-  {
-    encodeValuesOnly: true,
-  }
-)
-const courseFetcher = (url) => axios.get(url).then((res) => res.data.data[0])
-const postsFetcher = (url) => axios.get(url).then((res) => res.data.data)
+const fetcher = swrFetcher
 
 export default function Home({ fallback }) {
-  const { data: course, error: courseError } = useSWR(
-    `${API_URL}/api/courses?${courseQuery}`,
-    courseFetcher,
+  const { data: courses, error: coursesError } = useSWR(
+    `${API_URL}/api/courses?${coursesQuery}`,
+    fetcher,
     {
-      fallbackData: fallback[`${API_URL}/api/courses?${courseQuery}`],
+      fallbackData: fallback[`${API_URL}/api/courses?${coursesQuery}`],
     }
   )
-  const { data: posts, error: postsError } = useSWR(
-    `${API_URL}/api/posts?${postsQuery}`,
-    postsFetcher,
-    {
-      fallbackData: fallback[`${API_URL}/api/posts?${postsQuery}`],
-    }
-  )
+  const { data: posts, error: postsError } = useSWR(`${API_URL}/api/posts?${postsQuery}`, fetcher, {
+    fallbackData: fallback[`${API_URL}/api/posts?${postsQuery}`],
+  })
 
-  if (courseError || postsError) {
-    return (
-      <Layout>
-        <Custom500Page />
-      </Layout>
-    )
+  if (coursesError || postsError) {
+    return <Custom500Page />
   }
-  if (!course || !posts) {
+
+  if (!courses || !posts) {
     return (
       <Layout>
         <p>Loading</p>
+        {/* TODO loading skeletons for courses and posts */}
       </Layout>
     )
   }
 
   const blogCardsArray = posts
-    ? posts.map((post) => <BlogPostCard duration={1} key={post.id} post={post.attributes} />)
+    ? posts.map((post) => (
+        <BlogPostCard duration={1} post={post.attributes} animated={false} key={post.id} />
+      ))
+    : []
+
+  const courseCardsArray = courses
+    ? courses.map((course) => <CourseCard key={course.id} course={course} />)
     : []
 
   return (
     <Layout>
       <div className='px-[2%] md:px-[8%] py-12'>
-        <Section title='Cursos & Talleres' blurOnMobile>
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            viewport={{ once: true }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 3 }}
-          >
-            <div className='py-3'>{course && <CourseCard course={course} />}</div>
-          </motion.div>
-          {course && course.attributes.onlyRecorded ? (
-            <Button
-              text='Adquirir curso'
-              href={course.attributes.recordingsFormUrl}
-              size='lg'
-              externalLink
-            />
-          ) : (
-            <Button
-              text='inscripciones'
-              href={course.attributes.inscriptionFormUrl}
-              size='lg'
-              externalLink
-            />
-          )}
+        <Section title='Cursos & Talleres' blurOnMobile href='/courses'>
+          <AnimatedDiv className='py-5 mx-auto 3xl:max-w-[80rem] max-w-[70rem]'>
+            <SlickCarousel>{courseCardsArray}</SlickCarousel>
+          </AnimatedDiv>
+          <div className='mt-4'>
+            <Button text='ver todos los cursos' href='/courses' size='md' />
+          </div>
         </Section>
       </div>
       <div className='px-[2%] md:px-[8%] pb-12'>
         <Section blurOnMobile>
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            viewport={{ once: true }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 3 }}
-            className=' 3xl:py-5'
-          >
+          <AnimatedDiv className=' 3xl:py-5'>
             <ScheduleCard />
-          </motion.div>
+          </AnimatedDiv>
         </Section>
       </div>
       <div className='px-[2%] md:px-[8%] pb-12'>
-        <Section title='Blog'>
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            viewport={{ once: true }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 3 }}
-          >
+        <Section title='Blog' href='/blog'>
+          <AnimatedDiv>
             <div className='py-8'>
               <div className='hidden max-w-6xl gap-1 mx-auto lg:grid lg:grid-flow-col justify-items-center 3xl:max-w-7xl bg-opacity-10 rounded-xl'>
                 {posts &&
@@ -148,12 +83,14 @@ export default function Home({ fallback }) {
                     <BlogPostCard index={i} key={post.id} post={post.attributes} />
                   ))}
               </div>
-              <div className='p-[2%] mx-auto lg:hidden rounded-xl w-fit'>
-                <CardCarousel cards={blogCardsArray} />
+              <div className='lg:hidden max-w-[25rem] mx-auto'>
+                <SlickCarousel arrows={true}>{blogCardsArray}</SlickCarousel>
               </div>
             </div>
-          </motion.div>
-          <Button text='ver más posts' href='/blog' size='md' />
+          </AnimatedDiv>
+          <div className='mt-2'>
+            <Button text='ver más posts' href='/blog' size='md' />
+          </div>
         </Section>
       </div>
     </Layout>
@@ -162,14 +99,13 @@ export default function Home({ fallback }) {
 
 export async function getStaticProps() {
   const posts = await axios.get(`${API_URL}/api/posts?${postsQuery}`)
-
-  const course = await axios.get(`${API_URL}/api/courses?${courseQuery}`)
+  const courses = await axios.get(`${API_URL}/api/courses?${coursesQuery}`)
 
   return {
     props: {
       fallback: {
         [`${API_URL}/api/posts?${postsQuery}`]: posts.data.data,
-        [`${API_URL}/api/courses?${courseQuery}`]: course.data.data[0],
+        [`${API_URL}/api/courses?${coursesQuery}`]: courses.data.data,
       },
     },
     revalidate: 1,

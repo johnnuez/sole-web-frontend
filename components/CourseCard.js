@@ -4,6 +4,19 @@ import ReactMarkdown from 'react-markdown'
 import { shortDate } from 'utils/dateParser'
 import Separator from './Separator'
 
+const RenderImage = ({ url, altText }) => {
+  return (
+    <Image
+      src={url}
+      layout='responsive'
+      width='100%'
+      height='100%'
+      alt={altText}
+      className='z-0 flex-1 rounded-lg shadow-lg'
+    />
+  )
+}
+
 export default function CourseCard({
   course: {
     attributes: {
@@ -28,14 +41,7 @@ export default function CourseCard({
           pictureOnRight ? 'md:hidden' : ''
         }`}
       >
-        <Image
-          src={`${image.formats.large.url}`}
-          layout='responsive'
-          width='100%'
-          height='100%'
-          alt={image.alternativeText}
-          className='flex-1 rounded-lg'
-        />
+        <RenderImage url={image.formats.large.url} altText={image.alternativeText} />
       </div>
       <div
         className={`py-4 ${
@@ -43,7 +49,13 @@ export default function CourseCard({
         } bg-zinc-900 rounded-lg flex-[5] mx-auto flex flex-col tracking-widest bg-opacity-80 justify-center min-h-[30rem] 3xl:min-h-[32rem] w-11/12 my-2 md:my-0 border border-yellow-500 border-opacity-20`}
       >
         <div className='flex flex-col px-[5%] justify-center text-neutral-100'>
-          <h1 className='mb-2 text-5xl tracking-wider text-center 3xl:text-6xl'>{title}</h1>
+          <Link href={`/courses/${slug}`} passHref className='select-none'>
+            <a>
+              <h1 className='mb-2 text-5xl tracking-wider text-center 3xl:text-6xl hover:text-yellow-600'>
+                {title}
+              </h1>
+            </a>
+          </Link>
           <h2 className='text-xl text-center 3xl:text-2xl'>{subtitle}</h2>
 
           <Separator />
@@ -75,9 +87,9 @@ export default function CourseCard({
               ? 'PRÓXIMAMENTE'
               : 'Curso Grabado'}
           </p>
-          <div className='mt-5 mb-3 text-xl text-center md:mt-3 md:mb-1'>
-            <Link href={`/courses/${slug}`}>
-              <a className='tracking-[0.2em] border border-yellow-600 hover:text-neutral-100 md:border-none border-opacity-80 transition-all ease-in-out duration-200 p-2 rounded-sm'>
+          <div className='mx-auto mt-5 mb-3 text-xl md:mt-3 md:mb-1'>
+            <Link href={`/courses/${slug}`} passHref className='select-none'>
+              <a className='tracking-[0.2em] border border-yellow-600 hover:text-neutral-100 md:border-none border-opacity-80 transition-all ease-in-out duration-200 rounded-sm w-fit p-2 md:p-0'>
                 VER MÁS
               </a>
             </Link>
@@ -91,14 +103,7 @@ export default function CourseCard({
             : 'hidden md:block flex-[3] pb-1 md:py-10 overflow-hidden rounded-lg w-11/12 mx-auto z-10'
         }`}
       >
-        <Image
-          src={`${image.formats.large.url}`}
-          layout='responsive'
-          width='100%'
-          height='100%'
-          alt={image.alternativeText}
-          className='flex-1 rounded-lg shadow-lg'
-        />
+        <RenderImage url={image.formats.large.url} altText={image.alternativeText} />
       </div>
     </div>
   )
